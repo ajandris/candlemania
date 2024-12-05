@@ -1,17 +1,13 @@
-Product Catalogue
+Candle Mania
 =================
 
-Link to 
+Link to production site: 
 
 # Introduction
 
-The Product Catalogue is a sample site for publishing products.
+The Candle Mania is a sample site for publishing blogs about candles and candle-related products.
 
-A site user can publish, update, and delete its products. A user can only see other users' products as a visitor.
-
-Each product has a picture, title, description and an affiliated product link.
-
-There is a category. Each product can be placed into only one category.
+The site has two parts: blogs and affiliated products.
 
 ## Users
 
@@ -32,15 +28,17 @@ A **superuser** can appoint a registered user to admin.
 - JavaScript
 - Python
 - Django
-- PostgreSQL with SQL
+- PostgreSQL
 - Git
 - GitHub
 - Grammarly to catch grammar slips and improve the text
 
 ## Intended audience
 
-This project's intended audience is anyone who wants insight into a simple product catalogue with user management,
-and project assessors and recruiters.
+This project's intended audience is anyone who is interested into information about candles and wants to by some 
+candles and their accessories.
+
+Project assessors and recruiters are welcome.
 
 # Development
 This part is dedicated to the page's development.
@@ -56,27 +54,35 @@ The Development of this site includes consequently following the stages describe
 ## Strategy plane
 **User stories**
 * as a site's visitor I need to
-  * [US-V1] browse all items
-  * [US-V2] have a paginator when there are many items on a page
-  * [US-V3] sort items by categories
-  * [US-V4] filter items by categories
-  * [US-V5] search items and categories by a phrase (classic search)
-  * [US-V6] see item details
-  * [US-V7] have a link to a marketplace to buy a product
+  * [US-V01] browse all items
+  * [US-V02] have a paginator when there are more than 20 items on a page in list mode
+  * [US-V03] sort items by name
+  * [US-V04] filter items by categories
+  * [US-V05] search items and categories by a phrase (classic search)
+  * [US-V06] see item details
+  * [US-V07] have a link to a marketplace to buy a product
 * as a registered user I need to
-  * [US-RU1] be able to do the same a visitor
-  * [US-RU2] have a login page
-  * [US-RU3] have a profile where I can change password and a name
-  * [US-RU4] add product
-  * [US-RU5] update my product
-  * [US-RU6] delete my product
-  * [US-RU7] list my products
+  * [US-RU01] be able to do the same a visitor
+  * [US-RU02] have a login page
+  * [US-RU03] have a profile where I can change password and a name
+  * [US-RU04] add product
+  * [US-RU05] update my product
+  * [US-RU06] delete my product
+  * [US-RU07] list my products
+  * [US-RU08] write a blog
+  * [US-RU09] comment a blog
+  * [US-RU10] delete my profile
 * as an admin I need to
-  * [US-A1] be able to do the same as a registered user
-  * [US-A2] list categories
-  * [US-A3] add category
-  * [US-A4] delete category if there is no product listed on that category
-  * [US-A5] update category name
+  * [US-A01] be able to do the same as a registered user
+  * [US-A02] list categories
+  * [US-A03] add category
+  * [US-A04] delete category if there is no product listed on that category
+  * [US-A05] update category name
+  * [US-A06] approve blog
+  * [US-A07] approve blog comments
+  * [US-A08] delete blog comments
+  * [US-A09] approve product feedback
+  * [US-A10] delete product feedback
 * as a superuser I need to
   * [US-SU1] list all registered users
   * [US-SU2] grant registered user an admin role
@@ -88,7 +94,7 @@ The Development of this site includes consequently following the stages describe
   * [US-SO4] the site's design, look and functionality follow industry standards
   * [US-SO5] the site has 404 error page (page not found)
 
-Site's development is performed using JetBrain's PyCharm IDE, Python version 3.12 and Flask version 3.0.3.
+Site's development is performed using JetBrain's PyCharm IDE, Python version 3.12 and Django version 5.1.4.
 Site uses the database PostgreSQL v16 for storing data.
 Git and GitHub is used for storing code and version control.
 
@@ -98,16 +104,15 @@ functionality can be reduced up to the registered user.
 
 At the end of development will be delivered:
 * Implemented User Stories
-* User Manual as a section in README.md file
+* README.md file
 * Development documentation in README.md file, in particular:
   * Requirements,
-  * Functional specifications,
   * Testing process in a separate file,
 * Deployment to cPanel hosting.
 * Code and version control using Git and GitHub
 
 ## Structure plane
-The structure plane is concerned with design elements – what will be on pages.
+The structure plane is concerned with design elements on pages.
 
 **Wireframes** allow seeing what will be on pages. There is no detailed design or colours (in most cases); #
 schematic elements only are placed on a page.
@@ -142,6 +147,47 @@ Acceptance tests ensure that all user requirements are met. In this project, the
 The full performed test is in a [separate file](/TESTING.md).
 
 # Deployment
+
+## Creating database and granting privileges
+
+To create database and database user using SQL statements connect to the database server with commandline tool 
+with user having admin privileges. Change `user`, `database` and `mypassword` in scripts with your preferred names.
+
+**Creating database:**
+```
+CREATE USER myuser WITH PASSWORD 'mypassword';
+CREATE DATABASE mydatabase;
+```
+**Privileges to database user:**
+```
+GRANT CONNECT ON DATABASE mydatabase TO myuser;
+GRANT USAGE ON SCHEMA public TO myuser;
+GRANT CREATE ON SCHEMA public TO myuser;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO myuser;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO myuser;
+```
+
+## Environment variables
+Environment variables for development are set in env.py file. For the production environment those should be set
+on web server during deployment. The development environment is set on a local computer with postgresql installed.
+
+**The list of environment variables:**
+```
+# security
+os.environ.setdefault('SECRET_KEY', '<THE KEY FROM INITIAL SETTINGS.PY FILE>')
+os.environ.setdefault('DEBUG', 'True')
+os.environ.setdefault('ALLOWED_HOSTS', 'localhost, 127.0.0.1') # list of allowed hosts
+
+# database
+os.environ.setdefault('POSTGRES_USER', 'myuser')
+os.environ.setdefault('POSTGRES_PASSWORD', 'mypassword'),
+os.environ.setdefault('POSTGRES_HOST', 'localhost'),
+os.environ.setdefault('POSTGRES_PORT', '5432'),
+os.environ.setdefault('POSTGRES_DATABASE_NAME', 'mydatabase')
+```
+The secret key is copied from initial settings.py file. If you do not have it create a temporary django app, 
+copy the key and destroy that django app.
+
 
 # References
 
