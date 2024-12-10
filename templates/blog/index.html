@@ -5,20 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" type="text/css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{% static '/assets/css/main.css' %}" type="text/css">
     <title>CandleMania</title>
+    <link rel="icon" type="image/png" href="{% static 'assets/images/candlemania-favicon.png' %}">
 </head>
 <body>
 <header>
-    <h1>CandleMania header</h1>
+    <div class="w3-container">
+            <div><span id="nav-open-side-bar" class="w3-xlarge w3-bold w3-hide-medium w3-hide-large">&#9776;</span>
+            <nav class="w3-hide-medium w3-hide-large w3-top" id="nav-side-bar">
+                <div class="w3-sidebar w3-bar-block w3-amber w3-border w3-border-black">
+                  <div class="w3-hover-green">
+                      <button class="w3-bar-item w3-button w3-hover-green"><span id="nav-close-side-bar" class="w3-right w3-xlarge">&times;</span></button>
+                  </div>
+                  <a href="#" class="w3-bar-item w3-button w3-hover-green  active-menu-item">Home</a>
+                  <a href="#" class="w3-bar-item w3-button w3-hover-green">Blogs</a>
+                  <a href="#" class="w3-bar-item w3-button w3-hover-green">Products</a>
+                </div>
+            </nav>
+                <div class="w3-right" id="header-auth-line">Login | Register | Logoff</div>
+            </div>
+    </div>
+    <div class="w3-container">
+        <img src="{% static 'assets/images/candlemania-logo.png' %}" alt="Candlemania Logo" id="header-logo"> <span id="header-site-title">CandleMania</span>
+    </div>
+    <!-- horizontal menu -->
+        <nav class="wide center w3-hide-small w3-amber" id="header-menu">
+                <a href="#" class="w3-button w3-hover-green active-menu-item">Home</a>
+                <a href="#" class="w3-button w3-hover-green">Blogs</a>
+                <a href="#" class="w3-button w3-hover-green">Products</a>
+        </nav>
 </header>
-<article>
-    <h1>This is CandleMania first page</h1>
-</article>
+<main>
 
-<footer>
-    <h1>CandleMania footer</h1>
+    <h1>This is CandleMania first page</h1>
+</main>
+
+<footer class="wide center w3-bottom">
+    <p>&nbsp;</p>
+    <p>Copyright&copy; 2024</p>
 </footer>
+
+<script src="{% static 'assets/js/main.js' %}">
+</script>
+
 </body>
 </html>

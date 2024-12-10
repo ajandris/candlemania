@@ -1,4 +1,81 @@
 body {
-    background-color: #006b1b;
-    color: tomato;
+    background-color: #fafafa;
+    color: black;
+    margin: 0;
+}
+
+header {
+    background-color: #f3e0d1;
+}
+
+footer {
+    background-color: #f3e0d1;
+    min-height: 100px;
+}
+
+.wide{
+    width: 100%;
+}
+
+.center{
+    margin: auto;
+    text-align: center;
+}
+
+.active-menu-item{
+    opacity: 25%;
+    font-weight: bold;
+}
+
+#nav-side-bar{
+    width: 100%;
+    display: none;
+}
+
+#header-logo{
+    width: 200px;
+    height: 200px;
+}
+
+#banner-large{
+    width: 1200px;
+    height: 300px;
+    resize: both;
+}
+
+#header-auth-line{
+    padding-top: 3px;
+}
+
+#header-menu{
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-top-color: green;
+    border-bottom-color: green;
+    border-style: solid;
+}
+
+#header-site-title{
+    font-weight: bold;
+    font-family: 'Lucida Grande', Arial, sans-serif;
+    font-size: 36px;
+}
+
+/* -- mobile screen --*/
+@media screen and (max-width < 600px){
+
+
+}
+
+/* -- tablet screen --*/
+@media screen and (max-width < 993px){
+
+}
+
+/* -- desktop screen --*/
+@media screen and (min-width > 994px){
+
+
 }
