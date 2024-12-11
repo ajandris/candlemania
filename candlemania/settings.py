@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # user apps
     'product',
     'blog',
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -161,3 +162,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'accounts_login'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home'

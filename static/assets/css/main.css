@@ -4,6 +4,14 @@ body {
     margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6, p{
+    font-family: 'Lucida Grande', Arial, sans-serif;
+}
+
+h1{
+    font-size: 34px;
+}
+
 header {
     background-color: #f3e0d1;
 }
@@ -63,19 +71,61 @@ footer {
     font-size: 36px;
 }
 
-/* -- mobile screen --*/
-@media screen and (max-width < 600px){
+/**
+ Modifying allauth pages
+ */
+.page-wrapper{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    border: red solid 2px;
+}
+.page-wrapper input[type="text"],
+.page-wrapper input[type="password"],
+.page-wrapper input[type="email"] {
+    width: 100%;
+    margin-right: 0;
+}
+.page-wrapper label{
+    margin-left: 0;
+    font-weight: bold;
+}
 
+.page-wrapper table{
+    width: 100%;
+    text-align: left;
+}
+.page-wrapper th{
+    width: 25%;
+    padding-top: 0;
+    vertical-align: top;
+}
+
+.page-wrapper button{
+    font-weight: bold;
+    border-width: 2px;
+}
+
+.page-wrapper ul{
+    background-color: goldenrod;
+}
+
+/* -- desktop screen --*/
+@media screen and (min-width: 994px){
 
 }
 
 /* -- tablet screen --*/
-@media screen and (max-width < 993px){
-
+@media screen and (max-width: 993px){
+    .page-wrapper{
+        width: 75%;
+    }
 }
 
-/* -- desktop screen --*/
-@media screen and (min-width > 994px){
-
+/* -- mobile screen --*/
+@media screen and (max-width: 600px){
+    .page-wrapper{
+        width: 95%;
+    }
 
 }

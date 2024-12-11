@@ -1,12 +1,11 @@
-{% extends "_base.html" %}
+{% extends "account/base_entrance.html" %}
 {% load allauth i18n %}
 {% block head_title %}
-    {% trans "CandleMania | Signup" %}
+    {% trans "Signup" %}
 {% endblock head_title %}
 {% block content %}
-<div class="page-wrapper">
     {% element h1 %}
-        {% trans "Register your account" %}
+        {% trans "Sign Up" %}
     {% endelement %}
     {% setvar link %}
         <a href="{{ login_url }}">
@@ -22,10 +21,8 @@
         {% element form form=form method="post" action=action_url tags="entrance,signup" %}
             {% slot body %}
                 {% csrf_token %}
-                <table>
                 {% element fields form=form unlabeled=True %}
                 {% endelement %}
-                </table>
                 {{ redirect_field }}
             {% endslot %}
             {% slot actions %}
@@ -45,5 +42,4 @@
     {% if SOCIALACCOUNT_ENABLED %}
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}
-</div>
 {% endblock content %}

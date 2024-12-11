@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+"""
+Product functions
+"""
+def product_index(request):
+    return render(request, 'product/product-home.html')

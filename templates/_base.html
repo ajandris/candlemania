@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="{% static '/assets/css/main.css' %}" type="text/css">
-    <title>CandleMania</title>
+    <title>{% block head_title %}Candlemania{% endblock head_title %}</title>
     <link rel="icon" type="image/png" href="{% static 'assets/images/candlemania-favicon.png' %}">
 </head>
 <body>
@@ -19,30 +19,37 @@
                   <div class="w3-hover-green">
                       <button class="w3-bar-item w3-button w3-hover-green"><span id="nav-close-side-bar" class="w3-right w3-xlarge">&times;</span></button>
                   </div>
-                  <a href="#" class="w3-bar-item w3-button w3-hover-green  active-menu-item">Home</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hover-green">Blogs</a>
-                  <a href="#" class="w3-bar-item w3-button w3-hover-green">Products</a>
+                  <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-hover-green  active-menu-item">Home</a>
+                  <a href="{% url 'blog-home' %}" class="w3-bar-item w3-button w3-hover-green">Blogs</a>
+                  <a href="{% url 'product-home' %}" class="w3-bar-item w3-button w3-hover-green">Products</a>
                 </div>
             </nav>
-                <div class="w3-right" id="header-auth-line">Login | Register | Logoff</div>
+                <div class="w3-right" id="header-auth-line">
+                    {% if user.is_authenticated %}Welcome, {{ user.username }} |
+                        <a href="{% url 'account_logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}">Login</a> | <a href="{% url 'account_signup' %}">Register</a>
+                    {% endif %}
+                </div>
             </div>
     </div>
     <div class="w3-container">
-        <img src="{% static 'assets/images/candlemania-logo.png' %}" alt="Candlemania Logo" id="header-logo"> <span id="header-site-title">CandleMania</span>
+        <a href="{% url 'home' %}"><img src="{% static 'assets/images/candlemania-logo.png' %}" alt="Candlemania Logo" id="header-logo"></a> <span id="header-site-title">CandleMania</span>
     </div>
     <!-- horizontal menu -->
         <nav class="wide center w3-hide-small w3-amber" id="header-menu">
-                <a href="#" class="w3-button w3-hover-green active-menu-item">Home</a>
-                <a href="#" class="w3-button w3-hover-green">Blogs</a>
-                <a href="#" class="w3-button w3-hover-green">Products</a>
+                <a href="{% url 'home' %}" class="w3-button w3-hover-green active-menu-item">Home</a>
+                <a href="{% url 'blog-home' %}" class="w3-button w3-hover-green">Blogs</a>
+                <a href="{% url 'product-home' %}" class="w3-button w3-hover-green">Products</a>
         </nav>
 </header>
 <main>
+{% block content %}
 
-    <h1>This is CandleMania first page</h1>
+
+{% endblock content %}
 </main>
-
-<footer class="wide center w3-bottom">
+<footer class="wide center">
     <p>&nbsp;</p>
     <p>Copyright&copy; 2024</p>
 </footer>
@@ -52,3 +59,7 @@
 
 </body>
 </html>
+
+
+
+

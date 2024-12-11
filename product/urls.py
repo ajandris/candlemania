@@ -7,6 +7,6 @@ from . import views
 Main URL patterns
 """
 urlpatterns = [
-    path('', views.blog_index, name='blog-home'),
+    path('', views.product_index, name='product-home'),
 ]
 

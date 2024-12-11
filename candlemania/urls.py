@@ -39,7 +39,9 @@ Main URL patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', include('blog.urls'))
+    path('blogs/', include('blog.urls')),
+    path('products/', include('product.urls')),
+    path('', include('main.urls')),
 ]
 
 if settings.DEBUG:
