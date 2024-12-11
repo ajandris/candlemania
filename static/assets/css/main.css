@@ -78,7 +78,6 @@ footer {
     width: 50%;
     margin: auto;
     text-align: center;
-    border: red solid 2px;
 }
 .page-wrapper input[type="text"],
 .page-wrapper input[type="password"],
