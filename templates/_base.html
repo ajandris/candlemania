@@ -19,9 +19,9 @@
                   <div class="w3-hover-green">
                       <button class="w3-bar-item w3-button w3-hover-green"><span id="nav-close-side-bar" class="w3-right w3-xlarge">&times;</span></button>
                   </div>
-                  <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-hover-green  active-menu-item">Home</a>
-                  <a href="{% url 'blog-home' %}" class="w3-bar-item w3-button w3-hover-green">Blogs</a>
-                  <a href="{% url 'product-home' %}" class="w3-bar-item w3-button w3-hover-green">Products</a>
+                  <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-hover-green {% if active_menu == "home" %}active-menu-item{% endif %}">Home</a>
+                  <a href="{% url 'blog-home' %}" class="w3-bar-item w3-button w3-hover-green {% if active_menu == "blog" %}active-menu-item{% endif %}">Blogs</a>
+                  <a href="{% url 'product-home' %}" class="w3-bar-item w3-button w3-hover-green {% if active_menu == "product" %}active-menu-item{% endif %}">Products</a>
                 </div>
             </nav>
                 <div class="w3-right" id="header-auth-line">
@@ -38,9 +38,9 @@
     </div>
     <!-- horizontal menu -->
         <nav class="wide center w3-hide-small w3-amber" id="header-menu">
-                <a href="{% url 'home' %}" class="w3-button w3-hover-green active-menu-item">Home</a>
-                <a href="{% url 'blog-home' %}" class="w3-button w3-hover-green">Blogs</a>
-                <a href="{% url 'product-home' %}" class="w3-button w3-hover-green">Products</a>
+                <a href="{% url 'home' %}" class="w3-button w3-hover-green {% if active_menu == "home" %}active-menu-item{% endif %}">Home</a>
+                <a href="{% url 'blog-home' %}" class="w3-button w3-hover-green {% if active_menu == "blog" %}active-menu-item{% endif %}">Blogs</a>
+                <a href="{% url 'product-home' %}" class="w3-button w3-hover-green {% if active_menu == "product" %}active-menu-item{% endif %}">Products</a>
         </nav>
 </header>
 <main>

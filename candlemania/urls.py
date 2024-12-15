@@ -38,6 +38,7 @@ Main URL patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('allauth.urls')),
     path('blogs/', include('blog.urls')),
     path('products/', include('product.urls')),

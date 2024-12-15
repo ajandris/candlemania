@@ -109,6 +109,84 @@ footer {
     background-color: goldenrod;
 }
 
+/**
+    messages
+ */
+
+.messages{
+    padding-left: 0;
+    text-align: center;
+}
+
+.messages li{
+    list-style-type: none;
+    padding-top: 8px;
+    padding-bottom: 4px;
+}
+
+.debug{
+    background-color: #6c757d;
+    color: white;
+}
+
+.info{
+    background-color: #17a2b8;
+    color: black;
+}
+.success{
+    background-color: #28a745;
+    color: black;
+}
+.warning{
+    background-color: #FFA500;
+    color: black;
+}
+
+.error{
+    background-color: #FF0000;
+    color: white;
+}
+
+
+/**
+    Data entry forms
+ */
+.data-entry-form{
+    width: 75%;
+    border: none;
+    margin: auto;
+    padding: 5px;
+}
+
+.field-group{
+    margin-top: 5px;
+}
+
+.field-group label{
+    font-weight: bold;
+}
+
+.form-button-wrapper{
+    padding-top: 3px;
+    width: 100%;
+    text-align: center;
+}
+
+.form-button-wrapper button:hover{
+    background-color: #2dc26b;
+}
+
+.errorlist{
+    background-color: #8f5d00;
+}
+
+/* ------------------  Other styles ----------------------*/
+.button-bar{
+    margin: 15px 0 15px 0;
+}
+
+
+
 /* -- desktop screen --*/
 @media screen and (min-width: 994px){
 

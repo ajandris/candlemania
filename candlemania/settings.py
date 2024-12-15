@@ -43,14 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 3rd party apps
     # allauth apps
     'allauth',
     'allauth.account',
 
+    # editor
+    'tinymce',
+
     # user apps
     'product',
     'blog',
-    'main',
+    'main',   # common functionality, e.g. home page
 ]
 
 MIDDLEWARE = [
@@ -63,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Add the account middleware:
-    "allauth.account.middleware.AccountMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'candlemania.urls'
@@ -151,7 +155,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-#STATIC_ROOT = STATICFILES_DIRS[0]
+#STATIC_ROOT = BASE_DIR / 'static'
 
 # Media files
 MEDIA_URL = 'media/'
@@ -163,6 +167,59 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Authorisation
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'accounts_login'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+
+# TinyMCE editor
+TINYMCE_JS_URL = os.path.join(STATIC_URL, "path/to/tiny_mce/tiny_mce.js")
+
+TINYMCE_DEFAULT_CONFIG = {
+    'height': 360,
+    'width': '100%',
+    'cleanup_on_startup': True,
+    'custom_undo_redo_levels': 20,
+    'selector': 'textarea',
+    'theme': 'silver',
+    'plugins': 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+    'toolbar1': 'insertfile undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat',
+    'image_advtab': False,
+    'file_picker_types': 'file image media',
+    'contextmenu': '',
+    'menubar': False,
+    'statusbar': True,
+    'smart_paste': False
+}
+
+"""
+Bleach Sanitizer
+"""
+# Which HTML tags are allowed
+BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2', 'h3', 'h4', 'h5',
+                       'table', 'h6', 'td', 'th', 'th', 'th', 'td', 'hr', 'ul', 'li', 'ol',
+                       's', 'sup', 'sub', 'code', 'span', 'blockquote', 'codehilite', 'div', 'pre' ]
+
+# Which HTML attributes are allowed
+BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'alt', 'img', 'src', ]
+
+# Which CSS properties are allowed in 'style' attributes (assuming
+# style is an allowed attribute)
+BLEACH_ALLOWED_STYLES = [
+    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'padding-left', 'padding-right', 'padding',
+    'alignleft', 'aligncenter', 'alignright',
+    'alignjustify', 'bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'subscript', 'superscript',
+    'code', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'address', 'pre', 'samp', 'forecolor', 'hilitecolor',
+    'fontname', 'fontsize', 'fontsize_class', 'valign-top', 'valign-middle', 'align-bottom', 'color', 'background-color',
+    'text-decoration',
+]
+
+# Strip unknown tags if True, replace with HTML escaped characters if
+# False
+BLEACH_STRIP_TAGS = False
+
+# Strip comments, or leave them in.
+BLEACH_STRIP_COMMENTS = False
+
+# bleach widget for use with tinymce
+BLEACH_DEFAULT_WIDGET = 'tinymce.widgets.TinyMCE'

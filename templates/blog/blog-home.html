@@ -1,14 +1,85 @@
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Blog Home</title>
-</head>
-<body>
+{% extends '_base.html' %}
+{% load static %}
+{% block head_title %}CandleMania | Blogs{% endblock head_title %}
+{% block content %}
 
-    Blog home
+    <h1 class="center">Blog List</h1>
+    <div class="w3-container button-bar">
+        <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-new' %}">Write a Blog</a>
+        <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-my' %}">My Blogs</a>
+        <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-approve' %}">Approve Blogs</a>
+    </div>
 
-</body>
-</html>
+    {% include 'snippets/messages.html' %}
+
+    {% for blog in blogs %}
+        <div class="w3-card w3-border w3-margin">
+            <div class="w3-container w3-grey">
+                <h1 aria-description="Blog title">{{ blog.title }}</h1>
+            </div>
+            <div class="w3-container">
+                <div>Author: {{ blog.author }}</div>
+                <div>Published: {{ blog.updated_at }}</div>
+                <div aria-description="Blog">{{ blog.content|slice:"0:450"|safe }}</div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+        <div class="w3-container w3-row">
+        <div class="w3-col s12 m3 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-col s12 m3 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-col s12 m3 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-col s12 m3 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-container w3-row">
+        </div>
+        <div class="w3-col s12 m4 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-col s12 m4 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-col s12 m4 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+        <div class="w3-col s12 m4 l3">
+            <h2>Title</h2>
+            <p class="w3-left">
+                Blog excerpt
+            </p>
+        </div>
+    </div>
+<script src="{% static 'tinymce/tinymce.min.js' %}" charset="utf-8"></script>
+<script src="{% static 'django_tinymce/init_tinymce.js' %}" charset="utf-8"></script>
+
+{% endblock content %}

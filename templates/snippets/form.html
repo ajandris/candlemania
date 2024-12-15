@@ -1,0 +1,30 @@
+
+<div class="data-entry-form">
+    <form method="post" action="{{ action_url }}">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="field-group">
+                {{ field.errors }}
+                {% if field.field.widget.input_type == "checkbox" %}
+                    {{ field }}
+                    {{ field.label_tag }}
+                {% else %}
+                    {% if field.field.widget.input_type != "hidden" %}
+                        {{ field.label_tag }}
+                    {% endif %}
+                    {{ field }}
+                {% endif %}
+                {% if field.help_text %}
+                      <p class="help" id="{{ field.auto_id }}_helptext">
+                            {{ field.help_text|safe }}
+                      </p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div class="form-button-wrapper">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+    {{ user_value_script }}
+</div>

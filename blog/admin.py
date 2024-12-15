@@ -1,3 +1,11 @@
 from django.contrib import admin
+from blog.models import BlogComment, BlogPost
 
-# Register your models here.
+
+@admin.register(BlogComment)
+class BlogCommentAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(BlogPost)
+class BlogPostAdmin(admin.ModelAdmin):
+    pass
