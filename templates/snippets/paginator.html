@@ -1,13 +1,15 @@
-    <div class="w3-center">
-        <div class="w3-bar">
-            {% if pages.has_previous %}
-              <a href="?page={{ pages.previous_page_number }}" class="w3-bar-item w3-button">&laquo;</a>
-            {% endif %}
-            {% for page in pages.paginator %}
-              <a href="?page={{ page.number }}" class="w3-button {% if pages.number == forloop.counter %}w3-grey{% endif %}">{{ forloop.counter }}</a>
-            {% endfor %}
-            {% if pages.has_next %}
-              <a href="?page={{ pages.paginator.num_pages }}" class="w3-button">&raquo;</a>
-            {% endif %}
+    {% if pages.paginator.num_pages > 1 %}
+        <div class="w3-container w3-center">
+            <div class="w3-bar  w3-border-top w3-border-bottom">
+                {% if pages.has_previous %}
+                  <a href="?page={{ pages.previous_page_number }}" class="w3-bar-item w3-button">&laquo;</a>
+                {% endif %}
+                {% for page in pages.paginator %}
+                  <a href="?page={{ page.number }}" class="w3-button {% if pages.number == forloop.counter %}w3-grey{% endif %}">{{ forloop.counter }}</a>
+                {% endfor %}
+                {% if pages.has_next %}
+                  <a href="?page={{ pages.paginator.num_pages }}" class="w3-button">&raquo;</a>
+                {% endif %}
+            </div>
         </div>
-    </div>
+    {% endif %}

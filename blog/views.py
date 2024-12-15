@@ -8,11 +8,16 @@ from .models import BlogPost
 """
 Blog functions
 """
+
+GRID_ITEMS_PER_PAGE = 8
+LIST_ITEMS_PER_PAGE = 10
+
 def blog_index(request):
     blogs = BlogPost.objects.all().filter(approved=True).order_by('-updated_at')
 
-    paginator = Paginator(blogs, 4)
+    paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
     page = request.GET.get('page')
+
     try:
         pages = paginator.page(page)
     except PageNotAnInteger:

@@ -147,6 +147,11 @@ footer {
     color: white;
 }
 
+.paginator {
+    border-top: gray solid 1px;
+}
+
+
 
 /**
     Data entry forms
