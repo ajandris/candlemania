@@ -183,7 +183,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'selector': 'textarea',
     'theme': 'silver',
     'plugins': 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-    'toolbar1': 'insertfile undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat',
+    'toolbar1': 'insertfile undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat',
     'image_advtab': False,
     'file_picker_types': 'file image media',
     'contextmenu': '',
@@ -205,14 +205,18 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'alt', 'img', 'src', ]
 
 # Which CSS properties are allowed in 'style' attributes (assuming
 # style is an allowed attribute)
+
+
 BLEACH_ALLOWED_STYLES = [
-    'font-family', 'font-weight', 'text-decoration', 'font-variant', 'padding-left', 'padding-right', 'padding',
-    'alignleft', 'aligncenter', 'alignright',
-    'alignjustify', 'bold', 'italic', 'underline', 'strikethrough', 'blockquote', 'subscript', 'superscript',
-    'code', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'address', 'pre', 'samp', 'forecolor', 'hilitecolor',
-    'fontname', 'fontsize', 'fontsize_class', 'valign-top', 'valign-middle', 'align-bottom', 'color', 'background-color',
-    'text-decoration',
+    'background', 'background-attachment', 'background-color', 'background-image', 'background-position', 'background-repeat', 'background-size',
+    'border', 'border-color', 'border-style', 'border-width', 'border-radius', 'border-collapse', 'border-spacing',
+    'color', 'cursor', 'direction', 'display', 'float', 'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight', 'height', 'justify-content',
+    'left', 'letter-spacing', 'line-height', 'margin', 'max-height', 'max-width', 'min-height', 'min-width', 'opacity', 'overflow', 'overflow-wrap', 'padding',
+    'position', 'right', 'text-align', 'text-decoration', 'text-indent', 'text-overflow', 'text-transform', 'top', 'vertical-align', 'visibility',
+    'white-space', 'width', 'word-break', 'z-index', 'list-style', 'list-style-type', 'list-style-position'
 ]
+
+
 
 # Strip unknown tags if True, replace with HTML escaped characters if
 # False

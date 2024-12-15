@@ -1,4 +1,5 @@
 import bleach
+from bleach.css_sanitizer import CSSSanitizer
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
@@ -24,7 +25,8 @@ class BlogPost(models.Model):
 
         allowed_tags = settings.BLEACH_ALLOWED_TAGS
         allowed_attrs = settings.BLEACH_ALLOWED_ATTRIBUTES
-        self.content = bleach.clean(self.content, tags=allowed_tags, attributes=allowed_attrs, css_sanitizer=settings.BLEACH_ALLOWED_STYLES)
+        sanitiser = CSSSanitizer(allowed_css_properties=settings.BLEACH_ALLOWED_STYLES)
+        self.content = bleach.clean(self.content, tags=allowed_tags, attributes=allowed_attrs, css_sanitizer=sanitiser)
         super().save(*args, **kwargs)
 
     def __str__(self):

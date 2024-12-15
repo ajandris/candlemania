@@ -1,5 +1,6 @@
 {% extends '_base.html' %}
 {% load static %}
+{% load get_excerpt %}
 {% block head_title %}CandleMania | Blogs{% endblock head_title %}
 {% block content %}
 
@@ -12,73 +13,32 @@
 
     {% include 'snippets/messages.html' %}
 
-    {% for blog in blogs %}
-        <div class="w3-card w3-border w3-margin">
-            <div class="w3-container w3-grey">
-                <h1 aria-description="Blog title">{{ blog.title }}</h1>
+    <!-- Data grid -->
+    <div class="w3-row">
+        {% for blog in blogs %}
+            <div class="w3-col m3 s12">
+                    <div class="w3-card w3-border w3-margin">
+                        <div class="w3-container w3-grey">
+                            <h1 aria-description="Blog title">{{ blog.title }}</h1>
+                        </div>
+                        <div class="w3-container">
+                            <div>Author: {{ blog.author }}</div>
+                            <div>Published: {{ blog.updated_at }}</div>
+                            <div aria-description="Blog">{{ blog.content|get_excerpt:10 }}</div>
+                        </div>
+                    </div>
             </div>
-            <div class="w3-container">
-                <div>Author: {{ blog.author }}</div>
-                <div>Published: {{ blog.updated_at }}</div>
-                <div aria-description="Blog">{{ blog.content|slice:"0:450"|safe }}</div>
-            </div>
-        </div>
-    {% endfor %}
-
-
-
-        <div class="w3-container w3-row">
-        <div class="w3-col s12 m3 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-col s12 m3 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-col s12 m3 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-col s12 m3 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-container w3-row">
-        </div>
-        <div class="w3-col s12 m4 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-col s12 m4 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-col s12 m4 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
-        <div class="w3-col s12 m4 l3">
-            <h2>Title</h2>
-            <p class="w3-left">
-                Blog excerpt
-            </p>
-        </div>
+            {% if forloop.counter|divisibleby:4 != 0 %}
+                </div>
+                <div class="w3-row">
+            {% endif %}
+        {% endfor %}
     </div>
+
+    <!-- EOF Data Grid -->
+
+    {% include 'snippets/paginator.html' %}
+
 <script src="{% static 'tinymce/tinymce.min.js' %}" charset="utf-8"></script>
 <script src="{% static 'django_tinymce/init_tinymce.js' %}" charset="utf-8"></script>
 

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, reverse, get_object_or_404, redirect
 from .forms import BlogPostForm
 from .models import BlogPost
@@ -9,9 +10,20 @@ Blog functions
 """
 def blog_index(request):
     blogs = BlogPost.objects.all().filter(approved=True).order_by('-updated_at')
+
+    paginator = Paginator(blogs, 4)
+    page = request.GET.get('page')
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)  # If page is not an integer, deliver the first page.
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)  # If page is out of range, deliver the last page of results.
+
     context = {
         "active_menu": "blog",
-        "blogs": blogs
+        "blogs": pages,
+        "pages": pages
     }
     return render(request, 'blog/blog-home.html', context=context)
 
