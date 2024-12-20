@@ -41,8 +41,8 @@ class BlogPost(models.Model):
 Blog Post Comments
 """
 class BlogComment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Comments', db_comment="Comment author")
-    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='Blog_comments', db_comment="Blog Post")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments', db_comment="Comment author")
+    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='blog_comments', db_comment="Blog Post")
     content = models.TextField(blank=False, null=False, db_comment="Comment")
     approved = models.BooleanField(default=False, db_comment="Comment Approval status")
     created_at = models.DateTimeField(auto_now_add=True, db_comment="Created at")

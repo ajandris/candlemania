@@ -49,5 +49,57 @@
     </div>
 
 </div>
+<div class="c3-container blog-comments">
+    <h2>Comments</h2>
+    {% if comments.count == 0 %}
+        <p>No comments yet. Be the first to write.</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'comment-add' %}">
+        <div class="field-group">
+            <label for="comment">Write a comment</label>
+            <input type="text" name="comment" id="comment" value="" placeholder="Write something good" required
+                   maxlength="255" size="30"/>
+            {% csrf_token %}
+            <input type="hidden" name="blog_slug" value="{{ blog.slug }}">
+            <button type="submit" class="w3-button w3-amber w3-hover-green">Add Comment</button>
+        </div>
+    </form>
+    {% else %}
+        To add comments you have to be <a href="{% url 'account_login' %}">logged in</a>.
+    {% endif %}
+
+    {% if comments.count > 0 %}
+        {% for comment in comments.all %}
+        <div class="w3-bar comment-info">
+            <div class="w3-bar-item">
+                Author: {{ comment.author }}, {{ comment.updated_at|date }}
+            </div>
+            {% if blog.author == user %}
+                {% if not comment.approved %}
+                    <div class="w3-bar-item">
+                        <form action="{% url 'comment-approve' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            <button name="approve" type="submit" class="w3-amber w3-hover-green">Approve</button>
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="w3-bar-item">
+                    <form action="{% url 'comment-delete' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                        <button name="delete" type="submit" class="w3-amber w3-hover-red">Delete</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        <div class="comment-text">
+            comment: {{ comment.content }}
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
 
 {% endblock content %}

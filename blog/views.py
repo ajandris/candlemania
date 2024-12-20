@@ -1,11 +1,11 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .forms import BlogPostForm
-from .models import BlogPost
-
+from .models import BlogPost, BlogComment
 
 """
 Blog functions
@@ -65,9 +65,11 @@ def blog_new(request):
 
 def blog_post(request, slug):
     blog = get_object_or_404(BlogPost, slug=slug)
+    comments = BlogComment.objects.filter(blog_post=blog).order_by('-created_at')
     context = {
         "active_menu": "blog",
-        "blog": blog
+        "blog": blog,
+        "comments": comments
     }
     return render(request, 'blog/blog-detail.html', context=context)
 
@@ -203,3 +205,43 @@ def blog_approve_list(request):
         "pages": pages
     }
     return render(request, 'blog/blog-approve-list.html', context=context)
+
+@login_required
+def comment_add(request):
+    if request.method == 'POST':
+        blog = get_object_or_404(BlogPost, slug=request.POST['blog_slug'])
+        comment_object = BlogComment()
+        comment_object.content = request.POST['comment']
+        comment_object.blog_post = blog
+        comment_object.author = request.user
+        comment_object.approved = False
+        comment_object.save()
+
+        messages.success(request, 'Comment added successfully. Wait for approval.')
+        context = {
+            "active_menu": "blog",
+            "blog": blog
+        }
+        return redirect('blog-post', slug=blog.slug)
+    else:
+        raise Http404("Only POST requests are allowed")
+
+def comment_delete(request):
+    if request.method == 'POST':
+        comment_object = get_object_or_404(BlogComment, pk=request.POST['comment_id'])
+        comment_object.delete()
+        messages.success(request, 'Comment deleted successfully.')
+        return redirect('blog-post', slug=comment_object.blog_post.slug)
+    else:
+        raise Http404("Only POST requests are allowed")
+
+def comment_approve(request):
+    if request.method == 'POST':
+        comment_object = get_object_or_404(BlogComment, pk=request.POST['comment_id'])
+        comment_object.approved = True
+        comment_object.save()
+        messages.success(request, 'Comment Approved.')
+        return redirect('blog-post', slug=comment_object.blog_post.slug)
+    else:
+        raise Http404("Only POST requests are allowed")
+

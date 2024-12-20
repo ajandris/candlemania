@@ -14,4 +14,7 @@ urlpatterns = [
     path('approve/', views.blog_approve, name='blog-approve'),
     path('approvelist/', views.blog_approve_list, name='blog-approve-list'),
     path('myblogs/', views.blog_my, name='blog-my'),
+    path('commadd/', views.comment_add, name='comment-add'),
+    path('commdel/', views.comment_delete, name='comment-delete'),
+    path('commappr/', views.comment_approve, name='comment-approve'),
 ]

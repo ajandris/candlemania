@@ -156,6 +156,13 @@ footer {
     margin:auto;
 }
 
+.blog-comments{
+    width: 75%;
+    margin:auto;
+}
+.blog-comments h2 {
+    text-align: left;
+}
 /**
     Data entry forms
  */
@@ -209,6 +216,23 @@ footer {
 .blog-to-approve{
     width: 350px;
     margin: auto;
+}
+
+.comment-info{
+    font-style: italic;
+    margin-bottom: 0;
+    font-size: 0.75em;
+    margin-top: 10px;
+    border-left: solid 1px grey;
+    border-right: solid 1px grey;
+    border-top: solid 1px grey;
+}
+.comment-text {
+    margin-bottom: 15px;
+    padding-left: 16px;
+    border-left: solid 1px grey;
+    border-right: solid 1px grey;
+    border-bottom: solid 1px grey;
 }
 
 /* -- desktop screen --*/
