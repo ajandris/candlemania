@@ -65,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     # Add the account middleware:
     'allauth.account.middleware.AccountMiddleware',
@@ -147,15 +148,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
-#STATIC_ROOT = BASE_DIR / 'static'
+if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+else:
+    # production
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Media files
 MEDIA_URL = 'media/'
@@ -169,8 +173,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Authorisation
 LOGIN_REDIRECT_URL = 'home'
-LOGIN_URL = 'accounts_login'
+LOGIN_URL = 'account_login'
 ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_USERNAME_MIN_LENGTH = 5
 
 # TinyMCE editor
 TINYMCE_JS_URL = os.path.join(STATIC_URL, "path/to/tiny_mce/tiny_mce.js")

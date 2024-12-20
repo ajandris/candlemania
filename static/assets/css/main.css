@@ -151,7 +151,10 @@ footer {
     border-top: gray solid 1px;
 }
 
-
+.blog{
+    width: 75%;
+    margin:auto;
+}
 
 /**
     Data entry forms
@@ -190,9 +193,28 @@ footer {
     margin: 15px 0 15px 0;
 }
 
+.button-bar button{
+    margin-left: 15px;
+}
 
+.blog-info{
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.blog-content{
+    font-size: 1.5em;
+}
+
+.blog-to-approve{
+    width: 350px;
+    margin: auto;
+}
 
 /* -- desktop screen --*/
+
+/* -- Screen sizes are W3css responsiveness screen sizes --*/
+
 @media screen and (min-width: 994px){
 
 }
@@ -202,6 +224,9 @@ footer {
     .page-wrapper{
         width: 75%;
     }
+    .blog{
+        width: 85%;
+    }
 }
 
 /* -- mobile screen --*/
@@ -209,5 +234,7 @@ footer {
     .page-wrapper{
         width: 95%;
     }
-
+    .blog{
+        width: 95%;
+    }
 }

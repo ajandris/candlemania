@@ -4,10 +4,9 @@
 {% block head_title %}CandleMania | Blogs{% endblock head_title %}
 {% block content %}
 
-    <h1 class="center">Blog List</h1>
+    <h1 class="center">My Blogs</h1>
     <div class="w3-container button-bar">
         <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-new' %}">Write a Blog</a>
-        <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-my' %}">My Blogs</a>
         <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-approve-list' %}">Approve Blogs</a>
     </div>
 
@@ -24,7 +23,8 @@
                         <div class="w3-container">
                             <div>Author: {{ blog.author }}</div>
                             <div>Published: {{ blog.updated_at }}</div>
-                            <div aria-description="Blog">{{ blog.content|get_excerpt:50 }}</div>
+                            <div>Approved: {{ blog.approved|yesno:"Yes,No" }}</div>
+                            <div aria-description="Blog">{{ blog.content|get_excerpt:10 }}</div>
                         </div>
                     </div>
             </div>
@@ -38,8 +38,5 @@
     <!-- EOF Data Grid -->
 
     {% include 'snippets/paginator.html' %}
-
-<script src="{% static 'tinymce/tinymce.min.js' %}" charset="utf-8"></script>
-<script src="{% static 'django_tinymce/init_tinymce.js' %}" charset="utf-8"></script>
 
 {% endblock content %}

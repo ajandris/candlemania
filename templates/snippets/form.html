@@ -22,6 +22,8 @@
                 {% endif %}
             </div>
         {% endfor %}
+        <input type="hidden" name="action" value="{{ action }}">
+        <input type="hidden" name="key" value="{{ key }}">
         <div class="form-button-wrapper">
             <button type="submit">Submit</button>
         </div>

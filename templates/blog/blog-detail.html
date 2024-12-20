@@ -1,0 +1,53 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load has_role %}
+{% block head_title %}CandleMania | Blogs{% endblock head_title %}
+{% block content %}
+
+    {% if user.is_authenticated and blog.author == user %}
+        <div class="w3-container button-bar w3-bar">
+            <form action="{% url 'blog-update'%}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name = "key" value="{{ blog.slug }}">
+                <input type="hidden" name="action" value="to_update">
+                <button class="w3-button w3-amber w3-hover-green w3-bar-item" type="submit">Edit</button>
+            </form>
+            {% if request.user|has_role:"Editor" and blog.approved == False %}
+                <form action="{% url 'blog-approve'%}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name = "key" value="{{ blog.slug }}">
+                    <input type="hidden" name="action" value="to_approve">
+                    <button class="w3-button w3-amber w3-hover-green w3-bar-item" type="submit">Approve</button>
+                </form>
+            {% endif %}
+            <form action="{% url 'blog-delete'%}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name = "key" value="{{ blog.slug }}">
+                <input type="hidden" name="action" value="to_delete">
+                <button class="w3-button w3-amber w3-bar-item w3-right w3-hover-red" type="submit">Delete</button>
+            </form>
+        </div>
+    {% endif %}
+
+<div class="c3-container blog  w3-border">
+    <h1 class="center">{{ blog.title }}</h1>
+    <div class="blog-info">
+        <div class="w3-block">
+            Author: {{ blog.author }}
+        </div>
+        <div class="w3-block">
+            Published: {{ blog.updated_at|date }}
+        </div>
+        {% if blog.author == user %}
+            <div class="w3-block">
+                Approved: {{ blog.approved|yesno:"Yes,No" }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="blog-content">
+        {{ blog.content|safe }}
+    </div>
+
+</div>
+
+{% endblock content %}

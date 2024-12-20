@@ -1,0 +1,36 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load get_excerpt %}
+{% load has_role %}
+{% block head_title %}CandleMania | Blogs{% endblock head_title %}
+{% block content %}
+
+    <h1 class="center">Approve Blog</h1>
+
+    {% include 'snippets/messages.html' %}
+
+    <div class="blog-to-approve">
+        <div class="w3-card w3-border w3-margin">
+            <div class="w3-container w3-grey">
+                <h1 aria-description="Blog title"><a href="{% url 'blog-post' blog.slug %}">{{ blog.title }}</a></h1>
+            </div>
+            <div class="w3-container">
+                <div>Author: {{ blog.author }}</div>
+                <div>Published: {{ blog.updated_at|date }}</div>
+                <div aria-description="Blog">{{ blog.content|get_excerpt:50 }}</div>
+            </div>
+            <div class="wide w3-bar">
+                {% if request.user|has_role:"Editor" %}
+                    <form action="{% url 'blog-approve'%}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name = "key" value="{{ blog.slug }}">
+                        <input type="hidden" name="action" value="approve">
+                        <button class="w3-button w3-amber w3-hover-green w3-margin w3-bar-item" type="submit">Approve</button>
+                    </form>
+                {% endif %}
+                <button class="w3-button w3-amber w3-hover-green w3-margin w3-bar-item w3-right" type="button" onclick="window.history.back();">Back</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

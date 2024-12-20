@@ -1,0 +1,13 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block head_title %}CandleMania | Blogs{% endblock head_title %}
+{% block content %}
+
+    <h1 class="center">Edit Blog</h1>
+
+    {% include 'snippets/form.html' %}
+
+<script src="{% static 'tinymce/tinymce.min.js' %}" charset="utf-8"></script>
+<script src="{% static 'django_tinymce/init_tinymce.js' %}" charset="utf-8"></script>
+
+{% endblock content %}

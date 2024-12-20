@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render, reverse, get_object_or_404, redirect
+from django.http import Http404
+from django.shortcuts import render, reverse, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .forms import BlogPostForm
 from .models import BlogPost
 
@@ -32,6 +34,7 @@ def blog_index(request):
     }
     return render(request, 'blog/blog-home.html', context=context)
 
+@login_required()
 def blog_new(request):
 
     if request.method == 'GET':
@@ -57,19 +60,146 @@ def blog_new(request):
             }
             return render(request, 'blog/blog-new.html', context=context)
 
+    return redirect('blog-my')
+
+
+def blog_post(request, slug):
+    blog = get_object_or_404(BlogPost, slug=slug)
+    context = {
+        "active_menu": "blog",
+        "blog": blog
+    }
+    return render(request, 'blog/blog-detail.html', context=context)
+
+def blog_update(request):
+    if request.method == 'POST':
+        action = request.POST.get('action') if request.POST.get('action') else ""
+        if action == 'to_update':
+            # before update
+            blog_to_update = get_object_or_404(BlogPost, slug=request.POST['key'], author=request.user)
+            form = BlogPostForm(instance=blog_to_update, label_suffix="")
+            context = {
+                "active_menu": "blog",
+                "form": form,
+                "action": "update",
+                "key": blog_to_update.slug
+            }
+            return render(request, 'blog/blog-update.html', context=context)
+        elif action == 'update':
+            # Update data
+            slug = request.POST['key'] if request.POST.get('key') else ""
+            old_data = get_object_or_404(BlogPost, slug=slug)
+            form = BlogPostForm(request.POST, instance=old_data, label_suffix="")
+            print(old_data)
+            if form.is_valid():
+                blog_post = form.save(commit=False)
+                if form.cleaned_data['title'] != form.initial['title']:
+                    blog_post.slug = None
+                blog_post.approved = False
+                blog_post.save()
+                messages.success(request, 'Your data has been saved successfully!')
+                return redirect('blog-my')
+            else:
+                messages.error(request, 'There was an error saving your data.')
+                context = {
+                    "active_menu": "blog",
+                    "form": form,
+                    "action": "update"
+                }
+                return render(request, 'blog/blog-update.html', context=context)
+        else:
+            raise Http404("Wrong action")
+    else:
+        raise Http404("GET request is not allowed")
+
+    messages.error(request, 'There was a problem with the code! You should not be seeing this message!')
+    print("This is the END")
+    raise Http404("Something wrong with the code!")
+
+
+
+def blog_delete(request):
+    if request.method == "POST":
+        action = request.POST.get("action")
+        blog_post = get_object_or_404(BlogPost, slug=request.POST.get("key"))
+        if action == "to_delete":
+            context = {
+                "active_menu": "blog",
+                "blog": blog_post
+            }
+            return render(request, template_name='blog/blog-delete.html', context=context)
+        elif action == "delete":
+            blog_post.delete()
+            messages.success(request, 'Data deleted successfully!')
+            return redirect('blog-my')
+        else:
+            # no action or wrong action
+            return redirect("blog-home")
+    else:
+        raise Http404("No GET method allowed")
+
+    # no request at all
     return redirect('blog-home')
 
 
-def blog_update(request, blog_slug):
-    pass
+def blog_approve(request):
+    if request.method == "POST":
+        action = request.POST.get("action")
+        blog_post = get_object_or_404(BlogPost, slug=request.POST.get("key"))
+        if action == "to_approve":
+            context = {
+                "active_menu": "blog",
+                "blog": blog_post
+            }
+            return render(request, template_name='blog/blog-approve.html', context=context)
+        elif action == "approve":
+            blog_post.approved = True
+            blog_post.save()
+            messages.success(request, 'Data saved successfully!')
+            return redirect('blog-approve-list')
+        else:
+            # no action or wrong action
+            return redirect("blog-home")
+    else:
+        raise Http404("No GET method allowed")
 
-def blog_delete(request, blog_slug):
-    pass
+    # no request at all
+    return redirect('blog-home')
 
-def blog_approve(request, blog_slug):
-    pass
+def blog_my(request):
+    blogs = BlogPost.objects.all().filter(author=request.user).order_by('-updated_at')
+    paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
+    page = request.GET.get('page')
 
-def blog_my(request, blog_slug):
-    pass
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)  # If page is not an integer, deliver the first page.
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)  # If page is out of range, deliver the last page of results.
 
+    context = {
+        "active_menu": "blog",
+        "blogs": pages,
+        "pages": pages
+    }
+    return render(request, 'blog/blog-my.html', context=context)
 
+def blog_approve_list(request):
+    blogs = BlogPost.objects.all().filter(approved=False).order_by('-updated_at')
+    paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
+    page = request.GET.get('page')
+
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)  # If page is not an integer, deliver the first page.
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)  # If page is out of range, deliver the last page of results.
+
+    context = {
+        "active_menu": "blog",
+        "blogs": pages,
+        "pages": pages
+    }
+    return render(request, 'blog/blog-approve-list.html', context=context)
