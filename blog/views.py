@@ -34,7 +34,7 @@ def blog_index(request):
     }
     return render(request, 'blog/blog-home.html', context=context)
 
-@login_required()
+@login_required
 def blog_new(request):
 
     if request.method == 'GET':
@@ -66,13 +66,16 @@ def blog_new(request):
 def blog_post(request, slug):
     blog = get_object_or_404(BlogPost, slug=slug)
     comments = BlogComment.objects.filter(blog_post=blog).order_by('-created_at')
+    public_comments = BlogComment.objects.filter(blog_post=blog, approved=True).order_by('-created_at')
     context = {
         "active_menu": "blog",
         "blog": blog,
-        "comments": comments
+        "comments": comments,
+        "public_comments": public_comments
     }
     return render(request, 'blog/blog-detail.html', context=context)
 
+@login_required
 def blog_update(request):
     if request.method == 'POST':
         action = request.POST.get('action') if request.POST.get('action') else ""
@@ -120,6 +123,7 @@ def blog_update(request):
 
 
 
+@login_required
 def blog_delete(request):
     if request.method == "POST":
         action = request.POST.get("action")
@@ -144,6 +148,7 @@ def blog_delete(request):
     return redirect('blog-home')
 
 
+@login_required
 def blog_approve(request):
     if request.method == "POST":
         action = request.POST.get("action")
@@ -168,6 +173,7 @@ def blog_approve(request):
     # no request at all
     return redirect('blog-home')
 
+@login_required
 def blog_my(request):
     blogs = BlogPost.objects.all().filter(author=request.user).order_by('-updated_at')
     paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
@@ -187,6 +193,7 @@ def blog_my(request):
     }
     return render(request, 'blog/blog-my.html', context=context)
 
+@login_required
 def blog_approve_list(request):
     blogs = BlogPost.objects.all().filter(approved=False).order_by('-updated_at')
     paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
@@ -226,6 +233,7 @@ def comment_add(request):
     else:
         raise Http404("Only POST requests are allowed")
 
+@login_required
 def comment_delete(request):
     if request.method == 'POST':
         comment_object = get_object_or_404(BlogComment, pk=request.POST['comment_id'])
@@ -235,6 +243,7 @@ def comment_delete(request):
     else:
         raise Http404("Only POST requests are allowed")
 
+@login_required
 def comment_approve(request):
     if request.method == 'POST':
         comment_object = get_object_or_404(BlogComment, pk=request.POST['comment_id'])
@@ -244,4 +253,3 @@ def comment_approve(request):
         return redirect('blog-post', slug=comment_object.blog_post.slug)
     else:
         raise Http404("Only POST requests are allowed")
-
