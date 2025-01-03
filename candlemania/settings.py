@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'tinymce',
 
     # user apps
-    'product',
     'blog',
     'main',   # common functionality, e.g. home page
 ]
