@@ -196,6 +196,12 @@ footer {
 }
 
 /* ------------------  Other styles ----------------------*/
+
+.content-box{
+    width: 75%;
+    margin: auto;
+}
+
 .button-bar{
     margin: 15px 0 15px 0;
 }
@@ -261,4 +267,5 @@ footer {
     .blog{
         width: 95%;
     }
+
 }

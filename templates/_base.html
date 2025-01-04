@@ -21,6 +21,7 @@
                   </div>
                   <a href="{% url 'home' %}" class="w3-bar-item w3-button w3-hover-green {% if active_menu == "home" %}active-menu-item{% endif %}">Home</a>
                   <a href="{% url 'blog-home' %}" class="w3-bar-item w3-button w3-hover-green {% if active_menu == "blog" %}active-menu-item{% endif %}">Blogs</a>
+                  <a href="{% url 'about' %}" class="w3-bar-item w3-button w3-hover-green {% if active_menu == "about" %}active-menu-item{% endif %}">About</a>
                 </div>
             </nav>
                 <div class="w3-right" id="header-auth-line">
@@ -39,6 +40,7 @@
         <nav class="wide center w3-hide-small w3-amber" id="header-menu">
                 <a href="{% url 'home' %}" class="w3-button w3-hover-green {% if active_menu == "home" %}active-menu-item{% endif %}">Home</a>
                 <a href="{% url 'blog-home' %}" class="w3-button w3-hover-green {% if active_menu == "blog" %}active-menu-item{% endif %}">Blogs</a>
+                <a href="{% url 'about' %}" class="w3-button w3-hover-green {% if active_menu == "about" %}active-menu-item{% endif %}">About</a>
         </nav>
 </header>
 <main>
