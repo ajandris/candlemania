@@ -1,12 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="5; url=index.html">
+    <meta http-equiv="refresh" content="5; url={% url 'home' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../../static/assets/images/candlemania_favicon.png">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/images/candlemania_favicon.png' %}">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="../../static/assets/css/error.css">
+    <link rel="stylesheet" href="{% static 'assets/css/error.css'%}">
     <title>Error 404 | CandleMania</title>
 </head>
 <body>
@@ -15,9 +16,9 @@
         <header class="w3-container">
             <h1>Page Not Found - Error 404</h1>
         </header>
-        <img src="../../static/assets/images/candlemania_logo.png" alt="CandleMania Logo">
+        <img src="{% static 'assets/images/candlemania_logo.png' %}" alt="CandleMania Logo">
         <footer class="w3-container w3-amber">
-            <a href="/" class="w3-button w3-hover-green">Home is here</a>
+            <a href="{% url 'home' %}" class="w3-button w3-hover-green">Home is here</a>
         </footer>
     </div>
 </div>
