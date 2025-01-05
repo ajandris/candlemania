@@ -1,6 +1,60 @@
 {% extends '_base.html' %}
+{% load get_excerpt %}
+{% load static %}
 {% block head_title %}CandleMania{% endblock head_title %}
 {% block content %}
 
-    <h1>This is CandleMania first page</h1>
+
+    <!--
+    Image source: https://www.freewebheaders.com/objects/candles-headers/
+    -->
+    <img src="{% static 'assets/images/wonderful_candles_light_header.jpg' %}" alt="Banner with candles" class="banner"/>
+
+    <!--
+
+    Last Blogs
+
+    -->
+    <h1 class="center">Last blogs</h1>
+    <div class="w3-row">
+        {% for blog in blogs %}
+            <div class="w3-col m3 s12">
+                    <div class="w3-card w3-border w3-margin">
+                        <div class="w3-container w3-grey">
+                            <h1 aria-description="Blog title"><a href="{% url 'blog-post' blog.slug %}">{{ blog.title }}</a></h1>
+                        </div>
+                        <div class="w3-container">
+                            <div>Author: {{ blog.author }}</div>
+                            <div>Published: {{ blog.updated_at }}</div>
+                            <div aria-description="Blog">{{ blog.content|get_excerpt:50 }}</div>
+                        </div>
+                    </div>
+            </div>
+            {% if forloop.counter|divisibleby:4 != 0 %}
+                </div>
+                <div class="w3-row">
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!--
+
+    Last comments
+
+    -->
+
+    <h1 class="center">Last comments</h1>
+        <div class="w3-row">
+        {% for comment in comments %}
+        <div class="w3-container index-comments">
+            <h4>Blog: <a href="{% url 'blog-post' comment.blog_post.slug %}">{{ comment.blog_post.title }}</a></h4>
+            <p><strong>Comment:</strong> {{ comment.content }}</p>
+            <p>Author: {{ comment.author }} @{{ comment.updated_at|date }} {{ comment.updated_at|time }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
 {% endblock content %}
