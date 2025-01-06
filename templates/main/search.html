@@ -1,10 +1,31 @@
 {% extends '_base.html' %}
+{% load get_excerpt %}
 {% block head_title %}CandleMania{% endblock head_title %}
 {% block content %}
 
 <div class="c3-container content-box">
-Search results
+    <h1>Search results</h1>
+    <p class="w3-large">Search criteria: "<strong>{{ prev_search_criteria }}</strong>"</p>
 
+    {% if search_results.count == 0 %}
+
+        <p>No results found</p>
+
+    {% else %}
+
+        <p>Results found: {{ search_results.count }}</p>
+
+        {% for record in search_results %}
+            <div class="w3-border-top">
+                <h3><a href="{% url 'blog-post' record.slug %}">{{ record.title }}</a></h3>
+                <p class="w3-small">{{ record.author.username }} @{{ record.updated_at }}</p>
+                {{ record.content|get_excerpt:100 }} <br>
+            </div>
+        {% endfor %}
+
+
+
+    {% endif %}
 
 </div>
 
