@@ -19,3 +19,12 @@ def about(request):
         "active_menu": "about"
     }
     return render(request, 'main/about.html', context=context)
+
+
+def search_site(request):
+    prev_search = "" if not request.GET.get('search_criteria') else request.GET.get('search_criteria')
+    context = {
+        "active_menu": "home",
+        "prev_search_criteria": prev_search
+    }
+    return render(request, 'main/search.html', context=context)

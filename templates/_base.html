@@ -13,7 +13,8 @@
 <body>
 <header>
     <div class="w3-container">
-            <div><span id="nav-open-side-bar" class="w3-xlarge w3-bold w3-hide-medium w3-hide-large">&#9776;</span>
+            <div>
+                <span id="nav-open-side-bar" class="w3-xlarge w3-bold w3-hide-medium w3-hide-large">&#9776;</span>
             <nav class="w3-hide-medium w3-hide-large w3-top" id="nav-side-bar">
                 <div class="w3-sidebar w3-bar-block w3-amber w3-border w3-border-black">
                   <div class="w3-hover-green">
@@ -33,8 +34,20 @@
                 </div>
             </div>
     </div>
-    <div class="w3-container">
-        <a href="{% url 'home' %}"><img src="{% static 'assets/images/candlemania_logo.png' %}" alt="Candlemania Logo" id="header-logo"></a> <span id="header-site-title">CandleMania</span>
+    <div class="w3-container w3-row">
+        <div class="w3-col l6 m6 s12">
+            <a href="{% url 'home' %}"><img src="{% static 'assets/images/candlemania_logo.png' %}" alt="Candlemania Logo" id="header-logo">
+                </a> <span id="header-site-title">CandleMania</span>
+        </div>
+        <div class="w3-col l6 m6 s12 w3" id="top_search_column">
+            <div id="top_search_box_id">
+                <form action="{% url 'search' %}" method="get" id="top_search_form_id">
+                        <input type="text" placeholder="Search ..." value="{{ prev_search_criteria }}" name="search_criteria"
+                        minlength="3" required/>
+                        <button class="w3-round-xlarge w3-hover-green  ">Search</button>
+               </form>
+            </div>
+        </div>
     </div>
     <!-- horizontal menu -->
         <nav class="wide center w3-hide-small w3-amber" id="header-menu">
