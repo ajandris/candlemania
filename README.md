@@ -5,9 +5,7 @@ Link to production site:
 
 # Introduction
 
-The Candle Mania is a sample site for publishing blogs about candles and candle-related products.
-
-The site has two parts: blogs and affiliated products.
+The Candle Mania is a sample site for publishing blogs about candles.
 
 ## Users
 
@@ -15,11 +13,11 @@ There are four categories of users: a visitor, a registered user, an admin and a
 
 A **visitor** can browse products and view each product's details.
 
-A **registered user** can do everything a visitor can and add, edit, and delete its products. It can change its name, surname and password in the profile section.
+A **registered user** can do everything a visitor can and add, edit, and delete its blogs. 
 
-An **admin** can add, edit and delete catalogue items.
+An **editor** can accept blogs.
 
-A **superuser** can appoint a registered user to admin.
+A **superuser** can appoint a registered user to editor.
 
 ## Used technologies, frameworks, services
 
@@ -35,8 +33,7 @@ A **superuser** can appoint a registered user to admin.
 
 ## Intended audience
 
-This project's intended audience is anyone who is interested into information about candles and wants to by some 
-candles and their accessories.
+This project's intended audience is anyone who is interested into information about candles.
 
 Project assessors and recruiters are welcome.
 
@@ -54,38 +51,27 @@ The Development of this site includes consequently following the stages describe
 ## Strategy plane
 **User stories**
 * as a site's visitor I need to
-  * [US-V01] browse all items
-  * [US-V02] have a paginator when there are more than 20 items on a page in list mode
-  * [US-V03] sort items by name
-  * [US-V04] filter items by categories
-  * [US-V05] search items and categories by a phrase (classic search)
-  * [US-V06] see item details
-  * [US-V07] have a link to a marketplace to buy a product
+  * [US-V01] browse all blogs
+  * [US-V02] have a paginator when there are more than 8 items on a page grid mode
+  * [US-V03] read the full blog
 * as a registered user I need to
   * [US-RU01] be able to do the same a visitor
   * [US-RU02] have a login page
-  * [US-RU03] have a profile where I can change password and a name
-  * [US-RU04] add product
-  * [US-RU05] update my product
-  * [US-RU06] delete my product
-  * [US-RU07] list my products
-  * [US-RU08] write a blog
-  * [US-RU09] comment a blog
-  * [US-RU10] delete my profile
-* as an admin I need to
+  * [US-RU03] write a blog
+  * [US-RU04] update my a blog
+  * [US-RU05] delete my a blog
+  * [US-RU06] comment a blog
+  * [US-RU07] approve blog comments
+  * [US-RU08] approve blog comments
+  * [US-RU09] approve blog comments
+* as an editor I need to
   * [US-A01] be able to do the same as a registered user
-  * [US-A02] list categories
-  * [US-A03] add category
-  * [US-A04] delete category if there is no product listed on that category
-  * [US-A05] update category name
-  * [US-A06] approve blog
-  * [US-A07] approve blog comments
-  * [US-A08] delete blog comments
-  * [US-A09] approve product feedback
-  * [US-A10] delete product feedback
+  * [US-A02] approve all blogs
+  * [US-A03] approve blog comments
+  * [US-A04] delete blog comments
 * as a superuser I need to
   * [US-SU1] list all registered users
-  * [US-SU2] grant registered user an admin role
+  * [US-SU2] grant registered user an editor role
   * [US-SU3] revoke admin the admin role
 * as a site owner I need to 
   * [US-SO1] show my skills in front-end and back-end programming
@@ -119,8 +105,8 @@ schematic elements only are placed on a page.
 
 
 
-**Entity-Relationship Diagrams** (ERD) show relationship between [data] entities. It is a starting point of a database design 
-and it affects site's navigation and design.
+**Entity-Relationship Diagrams** (ERD) show relationship between [data] entities. 
+It is a starting point of a database design, and it affects site's navigation and design.
 
 
 ## Skeleton plane
@@ -161,11 +147,20 @@ CREATE DATABASE mydatabase;
 **Privileges to database user:**
 ```
 GRANT CONNECT ON DATABASE mydatabase TO myuser;
-GRANT USAGE ON SCHEMA public TO myuser;
-GRANT CREATE ON SCHEMA public TO myuser;
-GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO myuser;
+```
+
+change superuser's default database with command:
+```
+\c mydatabase
+```
+Continue with granting privileges:
+```
+GRANT ALL PRIVILEGES ON SCHEMA public TO myuser;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO myuser;
 ```
+
+Detailed database and user creation is not included in this document as it would reveal server-side information.
+Overall, with cPanel database creation is straight-forward task.
 
 ## Environment variables
 Environment variables for development are set in env.py file. For the production environment those should be set
@@ -174,19 +169,107 @@ on web server during deployment. The development environment is set on a local c
 **The list of environment variables:**
 ```
 # security
-os.environ.setdefault('SECRET_KEY', '<THE KEY FROM INITIAL SETTINGS.PY FILE>')
-os.environ.setdefault('DEBUG', 'True')
-os.environ.setdefault('ALLOWED_HOSTS', 'localhost, 127.0.0.1') # list of allowed hosts
+SECRET_KEY: <THE KEY FROM INITIAL SETTINGS.PY FILE>
+DEBUG: False
+ALLOWED_HOSTS: localhost, 127.0.0.1  # a list of allowed hosts separated by coma
 
 # database
-os.environ.setdefault('POSTGRES_USER', 'myuser')
-os.environ.setdefault('POSTGRES_PASSWORD', 'mypassword'),
-os.environ.setdefault('POSTGRES_HOST', 'localhost'),
-os.environ.setdefault('POSTGRES_PORT', '5432'),
-os.environ.setdefault('POSTGRES_DATABASE_NAME', 'mydatabase')
+POSTGRES_USER: <myuser>
+POSTGRES_PASSWORD: <mypassword>
+POSTGRES_HOST: localhost
+POSTGRES_PORT: 5432  # default is 5432
+POSTGRES_DATABASE_NAME: <mydatabase>
 ```
 The secret key is copied from initial settings.py file. If you do not have it create a temporary django app, 
 copy the key and destroy that django app.
+
+## The very first installation
+### Environment
+
+### Pre-installation procedures
+
+1. create a database and a database user with permission described above (how to configure PostgreSQL see a database documentation)
+2. Enabling environment variables named above
+  [images]
+
+### Installation
+1. copying files
+
+* Download project files from github as one zip file.
+
+![download source code from github image](/readme_assets/deployment/download_files_from_git.png)
+
+* For copying files with cPanel's File Manager: create a folder for candlemania files. Let's call it a &lt;project root&gt;
+
+* Upload dowloaded project's code zip into &lt;project root&gt;
+* Unzip candlemania files into &lt;project root&gt; (see image)
+
+![image of project code into <project root>](/readme_assets/deployment/copied_and_extracted_files_in_project_root.png)
+
+3. create a domain/subdomain pointing to the &lt;project root&gt;/candlemania-main directory
+
+2. deploying application
+* in cPanel Software section choose Setup Python App.
+* on the next screen cPanel will show a list of installed applications. Press the button "Create Application"
+
+![image of create application screen](/readme_assets/deployment/create_application_screen.png)
+Choose Python version 3.12, write the directory name where project code resides, choose domain name for the application 
+and press the button "Create".
+
+Additional configuration information is added to the application screen.
+![image of generated configuration info](/readme_assets/deployment/generated_config_info.png)
+
+Environment variables can be added before or during application creation.
+
+After successful app installation site shows default web server response.
+![image of default python app response](/readme_assets/deployment/it_works.png)
+
+
+2. installing dependencies
+
+* From a terminal as a user (not root) activate virtual environment and change directory to the &lt;project root&gt;.
+* in virtual environment execute '''pip install -r requirements.txt'''. That will install 
+all packages. If there is a problem with psycopg2 installation, in requirements.txt file change psycopg2
+to psycopg2-binary. That will avoid errors.
+
+3. building a database
+
+PostgreSQL database server should be installed and available in cPanel. This is a high level 
+guide as these tasks are not project specific.
+* Create a database by pressing Databases section button PostgreSQL Database Wizard or postgreSQL Databases.
+* Create a database user from PostgreSQL databases interface.
+* Grant database user access rights (see above) using phpPgAdmin application (web interface).
+
+***!NB*** button names can be different but still meaningful.
+
+* Finalise environment variable's setup in Python application interface.
+* in terminal issue command '''python manage.py makemigrations'''. If there are errors, most likely these 
+are due to database user has insufficient privileges to database ane/or schema PUBLIC.
+* in terminal issue command '''python manage.py migrate'''
+* Once migration is finished create administrative 
+account with a command '''python manage.py createsuperuser''' and enter all required information.
+* restart application.
+
+* Now application should work and have no blogs and no comments.
+
+### Post installation procedures
+
+***Adding the role "Editor"*** 
+
+* open site's admin page (SITE_URL/admin/) and enter superuser's credentials.
+* add Group "Editor" and press Save
+![adding group "Editor"](/readme_assets/deployment/create_editor_group.png)
+* Log out from administration screen.
+
+***Granting role "Editor" to a registered user*** 
+
+* On the site's main screen's top right corner press "Register" and fill all reequired information. That way is registered user created.
+* Log into admin screen choose user and enter edit screen.
+* Find section "Add group"
+* on the left box select "Editor"
+* press arrow pointing to the right.
+* Press Save
+![User as an "Editor"](/readme_assets/deployment/make_user_editor.png)
 
 
 # References
