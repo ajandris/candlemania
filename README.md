@@ -61,9 +61,10 @@ The Development of this site includes consequently following the stages describe
   * [US-RU04] update my a blog
   * [US-RU05] delete my a blog
   * [US-RU06] comment a blog
-  * [US-RU07] approve blog comments
-  * [US-RU08] approve blog comments
-  * [US-RU09] approve blog comments
+  * [US-RU07] approve blog comments to my posts
+  * [US-RU08] write blog comments
+  * [US-RU09] update my blog comments
+  * [US-RU10] delete my blog comments
 * as an editor I need to
   * [US-A01] be able to do the same as a registered user
   * [US-A02] approve all blogs
