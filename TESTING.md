@@ -81,6 +81,43 @@ First check give three categories of errors:
 
 
 ## Python
+To check python code, pylint is used.
+
+Install and usage from project root:
+```
+pip install pylint
+pylint ../candlemania/
+```
+
+At first use it showed a long list of errors from all modules in project and virtual environment, 
+so author decided to run pylint only on author's modules within project using syntax ```pylint module_name/```.
+Tested modules are _blog, candlemania and main_.
+### module: blog ###
+Initial checking gave long list of errors which can be grouped by following topics:
+* Missing module/class docstring
+* Line too long
+* specific syntax/programming errors
+
+
+Errors left after fixing:
+* W0212: Access to a protected member _meta of a client class (protected-access)
+  
+  Reason: pylint does not see or understand protected members of inherited class.
+
+* E1101: Class '<class_name>' has no '<member>' member (no-member)
+
+  Reason: pylint does not see or understand protected members of inherited class.
+
+*  R0903: Too few public methods (0/2) (too-few-public-methods)
+
+  Error in forms.py Meta class. Program does not need changing other inherited methods 
+
+
+### module: candlemania ###
+
+### module: main ###
+
+
 
 # Acceptance testing
 Testing if software meets user stories (requirements).

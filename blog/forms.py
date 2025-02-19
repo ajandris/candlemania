@@ -1,8 +1,17 @@
+"""
+Module Name: forms.py
+
+Module description: This module defines data entry forms for BlogPost module
+
+"""
 from django import forms
 
 from .models import BlogPost
 
 class BlogPostForm(forms.ModelForm):
+    """
+    Form for BlogPost data entry
+    """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,5 +28,11 @@ class BlogPostForm(forms.ModelForm):
         })
 
     class Meta:
+        """
+        Meta class for BlogPost form
+        """
         model = BlogPost
         fields = ['title', 'content', 'approved']
+
+    def __str__(self):
+        return self.fields['title']

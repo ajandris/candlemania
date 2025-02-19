@@ -1,14 +1,14 @@
+"""
+URL Configuration for Blogs app
+"""
 from django.urls import path
 
 from . import views
 
-"""
-Main URL patterns
-"""
 urlpatterns = [
     path('', views.blog_index, name='blog-home'),
     path('new/', views.blog_new, name='blog-new'),
-    path('post/<slug:slug>/', views.blog_post, name='blog-post'),
+    path('post/<slug:slug>/', views.blog_detail, name='blog-post'),
     path('update/', views.blog_update, name='blog-update'),
     path('delete/', views.blog_delete, name='blog-delete'),
     path('approve/', views.blog_approve, name='blog-approve'),
