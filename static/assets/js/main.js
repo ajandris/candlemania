@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 
 function main() { // wrapper function
     /**
@@ -13,12 +15,12 @@ function main() { // wrapper function
         document.getElementById("nav-side-bar").style.display = "none";
     }
 
-    document.getElementById("nav-open-side-bar").addEventListener('click', (e)=> {
+    document.getElementById("nav-open-side-bar").addEventListener('click', ()=> {
         navbar_open();
-    })
-    document.getElementById("nav-close-side-bar").addEventListener('click', (e)=> {
+    });
+    document.getElementById("nav-close-side-bar").addEventListener('click', ()=> {
         navbar_close();
-    })
+    });
 
     /**
      * Other content
@@ -26,4 +28,5 @@ function main() { // wrapper function
 
 }// main
 
-main()
+main();
+

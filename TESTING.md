@@ -29,18 +29,51 @@ Standards testing is performed on author's work, not on third party components l
 After testing
 ![HTML Home Page error](readme_assets/errors/html_homepage_error.png)
 
+**Fix**: removed slash from Search and banner tags.
+
+**After fix**: no errors
+
+ **About page**
+
+No errors
+
 **Blogs home**
 
 After testing
 ![HTML Blogs home error](readme_assets/errors/html_blogshome_error.png)
+
+**Fix**: charset attribute from script tag in all blog template files. 
+Stash error is fixed with base template fix.
+
+**After fix**: no errors
+
+**New Blog**
+
 
 
 
 ## CSS
 **_Jigsaw CSS validator (_**[**_https://jigsaw.w3.org/css-validator_**](https://jigsaw.w3.org/css-validator)**_)_**
 
+There are two stylesheet files made by author and they are implemented into the files error.css and main.css.
+* error.css - no errors found
+* main.css - no errors found
+
 ## JavaScript
 **Formal syntax validation (**[**https://beautifytools.com/javascript-validator.php**](https://beautifytools.com/javascript-validator.php)**)**
+
+There is only one file to check: main.js. Others are third party scripts whicjh is out of author's control.
+
+First check give three categories of errors:
+* arrow function syntax (=>)' is only available in ES6 (use 'esversion: 6').
+
+    Solution: added hint at the start of the file: /* jshint esversion: 6 */
+* 'e' is defined but never used. (in event listeners)
+
+    Solution: deleted argument 'e' in event listeners
+* missing semicolon.
+
+    Solution: add semicolon
 
 
 ## Performance
