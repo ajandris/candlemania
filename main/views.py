@@ -1,12 +1,17 @@
+"""
+Module: views.py
+Description: Site's common use main app views
+"""
+
 from django.shortcuts import render
 from django.db.models import Q
-from django.db.models import QuerySet
 from blog.models import BlogPost, BlogComment
 
-"""
-Home page functions
-"""
+
 def index(request):
+    """
+    Index page functions
+    """
     blogs = BlogPost.objects.filter(approved='True').order_by("-updated_at")[:8]
     comments = BlogComment.objects.filter(approved='True').order_by("-updated_at")[:8]
     context = {
@@ -17,6 +22,9 @@ def index(request):
     return render(request, 'main/index.html', context=context)
 
 def about(request):
+    """
+    About page functions
+    """
     context = {
         "active_menu": "about"
     }
@@ -24,7 +32,11 @@ def about(request):
 
 
 def search_site(request):
-    prev_search = "" if not request.GET.get('search_criteria') else request.GET.get('search_criteria')
+    """
+    Search functions
+    """
+    prev_search = "" if not request.GET.get('search_criteria') \
+        else request.GET.get('search_criteria')
     blogs = BlogPost.objects.filter(Q(content__icontains=prev_search) |
                                     Q(title__icontains=prev_search) & Q(approved="True"))
 

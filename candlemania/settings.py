@@ -26,10 +26,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY') \
-    if 'SECRET_KEY' in os.environ else 'jdgdtsdq7w-sjdww8-wq>}{~newqer=asfdfd9fdfdf8df8d7fmm_&()_)|?'
+    if 'SECRET_KEY' in os.environ \
+    else 'jdgdtsdq7w-sjdww8-wq>}{~newqer=asfdfd9fdfdf8df8d7fmm_&()_)|?'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.environ.get('DEBUG') == 'False' else True
+DEBUG = False
+if os.environ.get('DEBUG') == 'True':
+    DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').replace(' ', '').split(',')
 
@@ -189,7 +192,8 @@ TINYMCE_DEFAULT_CONFIG = {
     'selector': 'textarea',
     'theme': 'silver',
     'plugins': 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-    'toolbar1': 'insertfile undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | removeformat',
+    'toolbar1': """insertfile undo redo | styles | bold italic | alignleft aligncenter 
+            alignright alignjustify | bullist numlist | removeformat""",
     'image_advtab': False,
     'file_picker_types': 'file image media',
     'contextmenu': '',
@@ -204,7 +208,7 @@ Bleach Sanitizer
 # Which HTML tags are allowed
 BLEACH_ALLOWED_TAGS = ['p', 'b', 'i', 'u', 'em', 'strong', 'a', 'h1', 'h2', 'h3', 'h4', 'h5',
                        'table', 'h6', 'td', 'th', 'th', 'th', 'td', 'hr', 'ul', 'li', 'ol',
-                       's', 'sup', 'sub', 'code', 'span', 'blockquote', 'codehilite', 'div', 'pre' ]
+                       's', 'sup', 'sub', 'code', 'span', 'blockquote', 'codehilite', 'div', 'pre']
 
 # Which HTML attributes are allowed
 BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'alt', 'img', 'src', ]
@@ -214,12 +218,16 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href', 'title', 'style', 'alt', 'img', 'src', ]
 
 
 BLEACH_ALLOWED_STYLES = [
-    'background', 'background-attachment', 'background-color', 'background-image', 'background-position', 'background-repeat', 'background-size',
-    'border', 'border-color', 'border-style', 'border-width', 'border-radius', 'border-collapse', 'border-spacing',
-    'color', 'cursor', 'direction', 'display', 'float', 'font-family', 'font-size', 'font-style', 'font-variant', 'font-weight', 'height', 'justify-content',
-    'left', 'letter-spacing', 'line-height', 'margin', 'max-height', 'max-width', 'min-height', 'min-width', 'opacity', 'overflow', 'overflow-wrap', 'padding',
-    'position', 'right', 'text-align', 'text-decoration', 'text-indent', 'text-overflow', 'text-transform', 'top', 'vertical-align', 'visibility',
-    'white-space', 'width', 'word-break', 'z-index', 'list-style', 'list-style-type', 'list-style-position'
+    'background', 'background-attachment', 'background-color', 'background-image',
+    'background-position', 'background-repeat', 'background-size','border', 'border-color',
+    'border-style', 'border-width', 'border-radius', 'border-collapse', 'border-spacing',
+    'color', 'cursor', 'direction', 'display', 'float', 'font-family', 'font-size', 'font-style',
+    'font-variant', 'font-weight', 'height', 'justify-content', 'left', 'letter-spacing',
+    'line-height', 'margin', 'max-height', 'max-width', 'min-height', 'min-width', 'opacity',
+    'overflow', 'overflow-wrap', 'padding', 'position', 'right', 'text-align', 'text-decoration',
+    'text-indent', 'text-overflow', 'text-transform', 'top', 'vertical-align', 'visibility',
+    'white-space', 'width', 'word-break', 'z-index', 'list-style', 'list-style-type',
+    'list-style-position'
 ]
 
 

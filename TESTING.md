@@ -98,8 +98,17 @@ Initial checking gave long list of errors which can be grouped by following topi
 * Line too long
 * specific syntax/programming errors
 
+After fixing there are only few errors left with are described in Section "Unfixed Errors".
 
-Errors left after fixing:
+### module: main ###
+
+
+### module: candlemania ###
+
+
+### Unfixed Errors ###
+This section provides list and the reasons why some errors are not fixed.
+
 * W0212: Access to a protected member _meta of a client class (protected-access)
   
   Reason: pylint does not see or understand protected members of inherited class.
@@ -111,12 +120,6 @@ Errors left after fixing:
 *  R0903: Too few public methods (0/2) (too-few-public-methods)
 
   Error in forms.py Meta class. Program does not need changing other inherited methods 
-
-
-### module: candlemania ###
-
-### module: main ###
-
 
 
 # Acceptance testing
