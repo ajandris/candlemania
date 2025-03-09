@@ -79,6 +79,14 @@ First check give three categories of errors:
 ## Performance
 **_Lighthouse (_**[**_https://web.dev/measure/_**](https://web.dev/measure/)**_)_**
 
+Performance passes without errors for empty home page.
+
+Mobile
+![Mobile](readme_assets/pass/homepage_without_data_page_speed_mobile.png)
+
+Desktop
+![Desktop](readme_assets/pass/homepage_without_data_page_speed_desktop.png)
+
 
 ## Python
 To check python code, pylint is used.
@@ -100,12 +108,6 @@ Initial checking gave long list of errors which can be grouped by following topi
 
 After fixing there are only few errors left with are described in Section "Unfixed Errors".
 
-### module: main ###
-
-
-### module: candlemania ###
-
-
 ### Unfixed Errors ###
 This section provides list and the reasons why some errors are not fixed.
 
@@ -115,17 +117,59 @@ This section provides list and the reasons why some errors are not fixed.
 
 * E1101: Class '<class_name>' has no '<member>' member (no-member)
 
-  Reason: pylint does not see or understand protected members of inherited class.
+  Reason: pylint does not "see" or understand protected members of inherited class.
 
 *  R0903: Too few public methods (0/2) (too-few-public-methods)
 
-  Error in forms.py Meta class. Program does not need changing other inherited methods 
+  Program does not need changing other inherited methods 
 
 
 # Acceptance testing
 Testing if software meets user stories (requirements).
 
+These tests are performed manually.
 
+## As a site visitor I need to
+
+| User story ID | User story | Test passed? | Comments                         | Repeated test passed? |
+|----------|-------------|--------------|----------------------------------|---------|
+| [US-V01] | browse all blogs | Yes          | Site's main page                 | |
+| [US-V02] | have a paginator when there are more than 8 items on a page grid mode | Yes | Site's main page and search results | |
+| [US-V03] | read the full blog | Yes | Press on blog title in the list | | |
+
+## As a registered user I need to
+| User story ID | User story                                              | Test passed? | Comments                                                        | Repeated test passed? |
+|---------------|---------------------------------------------------------|--------------|-----------------------------------------------------------------|-----------------------|
+| [US-RU01]     | be able to do the same as a visitor can                 | Yes          | User stories US-V01 to US-V03                                   |                       |
+| [US-RU02]     | be able to log in                                       | Yes          | Choose a link on the right top corner                           |                       |
+| [US-RU03]     | have a registration page                                | Yes          | Choose a link on the right top corner                           |                       |
+| [US-RU04]     | write a blog                                            | Yes          | Choose a button "Write blog"                                    |                       |
+| [US-RU05]     | update my a blog                                        | Yes          | Press Edit in blog details page                                 |                       |
+| [US-RU06]     | delete my a blog                                        | Yes          | Press Delete in blog details page and accept in the next page.  |                       |
+| [US-RU07]     | approve blog comments to my posts                       | Yes          | Blog author can approve blog comment by pressing button Approve |                       |
+| [US-RU08]     | write blog comments                                     | Yes          | Write a comment in text field and submit                        |                       |
+| [US-RU09]     | delete my blog comments                                 | Yes          | Press Delete by the comment                                     |                       |
+| [US-RU10]     | have my blogs protected from deleting by other users    | Yes          | Edit button appears only to blog author                         |                       |
+| [US-RU11]     | have my comments protected from altering by other users | Yes          | Editing comments is not implemented                             |                       |
+| [US-RU12]     | have my comments protected from deleting by other users | Yes          | Delete button appears only to blog author or comment author     |                       |
+
+Testing revealed that comments block has many errors and had to be rewritten.
+
+
+## As an editor I need to
+| User story ID | User story                              | Test passed? | Comments                                             | Repeated test passed? |
+|---------------|-----------------------------------------|--------------|------------------------------------------------------|-----------------------|
+| [US-A01]      | be able to do the same as a visitor can | Yes          | User stories US-V01 to US-V03 and US-RU01 to US-RU12 |                       |
+| [US-A02]      | approve any blogs                       | No           | Approve button was ot showing in blog details.       | Yes                   |
+| [US-A03]      | delete any blog                         | No           | Delete button was not showing                        | Yes                   |
+
+
+## As a superuser I need to
+| User story ID | User story                              | Test passed? | Comments                                                                  | Repeated test passed? |
+|---------------|-----------------------------------------|--------------|---------------------------------------------------------------------------|-----------------------|
+| [US-SU1]      | be able to do the same as a visitor can | Yes          | User stories US-V01 to US-V03 and US-RU01 to US-RU12 and US-A01 to US-A03 |                       |
+| [US-SU2]      | grant registered user an editor role    | Yes          | Use admin interface                                                       |                       |
+| [US-SU3]      | revoke admin the editor role            | Yes          | Use admin interface                                                       |                       |
 
 
 [Back to README](README.md)

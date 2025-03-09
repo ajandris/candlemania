@@ -55,25 +55,27 @@ The Development of this site includes consequently following the stages describe
   * [US-V02] have a paginator when there are more than 8 items on a page grid mode
   * [US-V03] read the full blog
 * as a registered user I need to
-  * [US-RU01] be able to do the same a visitor
-  * [US-RU02] have a login page
-  * [US-RU03] write a blog
-  * [US-RU04] update my a blog
-  * [US-RU05] delete my a blog
-  * [US-RU06] comment a blog
-  * [US-RU07] approve blog comments to my posts
-  * [US-RU08] write blog comments
-  * [US-RU09] update my blog comments
-  * [US-RU10] delete my blog comments
+  * [US-RU01] be able to do the same a visitor can
+  * [US-RU02] be able to log in
+  * [US-RU03] have a registration page
+  * [US-RU04] write a blog
+  * [US-RU05] update my a blog
+  * [US-RU06] delete my a blog
+  * [US-RU07] comment a blog
+  * [US-RU08] approve blog comments to my posts
+  * [US-RU09] delete my blog comments
+  * [US-RU10] have my blogs protected from altering by other users
+  * [US-RU11] have my blogs protected from deleting by other users
+  * [US-RU12] have my comments protected from altering by other users
+  * [US-RU13] have my comments protected from deleting by other users
 * as an editor I need to
   * [US-A01] be able to do the same as a registered user
-  * [US-A02] approve all blogs
-  * [US-A03] approve blog comments
-  * [US-A04] delete blog comments
+  * [US-A02] approve any blog
+  * [US-A03] delete blog
 * as a superuser I need to
   * [US-SU1] list all registered users
   * [US-SU2] grant registered user an editor role
-  * [US-SU3] revoke admin the admin role
+  * [US-SU3] revoke admin the editor role
 * as a site owner I need to 
   * [US-SO1] show my skills in front-end and back-end programming
   * [US-SO2] use PostgreSQL as a database

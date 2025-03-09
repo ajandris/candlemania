@@ -1,6 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 {% load get_excerpt %}
+{% load has_role %}
 {% block head_title %}CandleMania | Blogs{% endblock head_title %}
 {% block content %}
 
@@ -8,7 +9,9 @@
     <div class="w3-container button-bar">
         <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-new' %}">Write a Blog</a>
         <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-my' %}">My Blogs</a>
-        <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-approve-list' %}">Approve Blogs</a>
+        {% if user|has_role:"Editor" %}
+            <a class="w3-button w3-amber w3-hover-green" href="{% url 'blog-approve-list' %}">Approve Blogs</a>
+        {% endif %}
     </div>
 
     {% include 'snippets/messages.html' %}

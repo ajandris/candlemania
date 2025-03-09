@@ -241,11 +241,8 @@ def comment_add(request):
         comment_object.save()
 
         messages.success(request, 'Comment added successfully. Wait for approval.')
-        context = {
-            "active_menu": "blog",
-            "blog": blog
-        }
-        return redirect('blog-post', slug=blog.slug, context=context)
+
+        return redirect('blog-post', slug=blog.slug)
 
     raise Http404("Wrong request method")
 

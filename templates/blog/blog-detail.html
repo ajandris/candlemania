@@ -4,15 +4,19 @@
 {% block head_title %}CandleMania | Blogs{% endblock head_title %}
 {% block content %}
 
-    {% if user.is_authenticated and blog.author == user %}
+    {% include 'snippets/messages.html' %}
+
+    {% if user.is_authenticated %}
         <div class="w3-container button-bar w3-bar">
-            <form action="{% url 'blog-update'%}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name = "key" value="{{ blog.slug }}">
-                <input type="hidden" name="action" value="to_update">
-                <button class="w3-button w3-amber w3-hover-green w3-bar-item" type="submit">Edit</button>
-            </form>
-            {% if request.user|has_role:"Editor" and blog.approved == False %}
+            {% if blog.author == user %}
+                <form action="{% url 'blog-update'%}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name = "key" value="{{ blog.slug }}">
+                    <input type="hidden" name="action" value="to_update">
+                    <button class="w3-button w3-amber w3-hover-green w3-bar-item" type="submit">Edit</button>
+                </form>
+            {% endif %}
+            {% if request.user|has_role:"Editor" and not blog.approved %}
                 <form action="{% url 'blog-approve'%}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name = "key" value="{{ blog.slug }}">
@@ -20,12 +24,14 @@
                     <button class="w3-button w3-amber w3-hover-green w3-bar-item" type="submit">Approve</button>
                 </form>
             {% endif %}
-            <form action="{% url 'blog-delete'%}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name = "key" value="{{ blog.slug }}">
-                <input type="hidden" name="action" value="to_delete">
-                <button class="w3-button w3-amber w3-bar-item w3-right w3-hover-red" type="submit">Delete</button>
-            </form>
+            {% if blog.author == user or user|has_role:"Editor" %}
+                <form action="{% url 'blog-delete'%}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name = "key" value="{{ blog.slug }}">
+                    <input type="hidden" name="action" value="to_delete">
+                    <button class="w3-button w3-amber w3-bar-item w3-right w3-hover-red" type="submit">Delete</button>
+                </form>
+            {% endif %}
         </div>
     {% endif %}
 
@@ -84,30 +90,32 @@
                 <div class="w3-bar-item">
                     Author: {{ comment.author }}, {{ comment.updated_at|date }}
                 </div>
-                {% if blog.author == user %}
-                    {% if not comment.approved %}
-                        <div class="w3-bar-item">
-                            <form action="{% url 'comment-approve' %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                                <button name="approve" type="submit" class="w3-amber w3-hover-green">Approve</button>
-                            </form>
-                        </div>
-                    {% endif %}
-                    <div class="w3-bar-item">
-                        <form action="{% url 'comment-delete' %}" method="post">
-                            {% csrf_token %}
-                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
-                            <button name="delete" type="submit" class="w3-amber w3-hover-red">Delete</button>
-                        </form>
-                    </div>
-                </div>
-                    <div class="comment-text">
-                        {{ comment.content }}
-                    </div>
-                    {% endif %}
-                {% endfor %}
             </div>
+                    <div class="w3-bar">
+                        {% if not comment.approved and user == blog.author %}
+                            <div class="w3-bar-item">
+                                <form action="{% url 'comment-approve' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                    <button name="approve" type="submit" class="w3-amber w3-hover-green">Approve</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                        {% if user == blog.author or user == comment.author %}
+                            <div class="w3-bar-item">
+                                <form action="{% url 'comment-delete' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                    <button name="delete" type="submit" class="w3-amber w3-hover-red">Delete</button>
+                                </form>
+                            </div>
+                        {% endif %}
+                     </div>
+                        <div class="comment-text">
+                            {{ comment.content }}
+                        </div>
+                {% endfor %}
+                </div>
             {% else %}
                 {% for comment in public_comments %}
                         <div class="w3-padding comment-info">
@@ -117,7 +125,7 @@
                             {{ comment.content }}
                         </div>
                 {% endfor %}
-    {% endif %}
+            {% endif %}
 </div>
 
 {% endblock content %}

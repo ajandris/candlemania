@@ -5,7 +5,12 @@
 
 <div class="c3-container content-box">
     <h1>Search results</h1>
+
     <p class="w3-large">Search criteria: "<strong>{{ prev_search_criteria }}</strong>"</p>
+
+
+    {% include 'snippets/messages.html' %}
+
 
     {% if search_results.count == 0 %}
 

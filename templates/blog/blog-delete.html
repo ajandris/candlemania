@@ -20,7 +20,7 @@
                 <div aria-description="Blog">{{ blog.content|get_excerpt:50 }}</div>
             </div>
             <div class="wide w3-bar">
-                {% if request.user == blog.author %}
+                {% if request.user == blog.author or user|has_role:"Editor" %}
                     <form action="{% url 'blog-delete'%}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name = "key" value="{{ blog.slug }}">
