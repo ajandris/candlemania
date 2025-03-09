@@ -169,7 +169,7 @@ Testing revealed that comments block has many errors and had to be rewritten.
 |---------------|-----------------------------------------|--------------|---------------------------------------------------------------------------|-----------------------|
 | [US-SU1]      | be able to do the same as a visitor can | Yes          | User stories US-V01 to US-V03 and US-RU01 to US-RU12 and US-A01 to US-A03 |                       |
 | [US-SU2]      | grant registered user an editor role    | Yes          | Use admin interface                                                       |                       |
-| [US-SU3]      | revoke admin the editor role            | Yes          | Use admin interface                                                       |                       |
+| [US-SU3]      | revoke the editor role                  | Yes          | Use admin interface                                                       |                       |
 
 
 [Back to README](README.md)

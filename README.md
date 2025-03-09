@@ -75,7 +75,7 @@ The Development of this site includes consequently following the stages describe
 * as a superuser I need to
   * [US-SU1] list all registered users
   * [US-SU2] grant registered user an editor role
-  * [US-SU3] revoke admin the editor role
+  * [US-SU3] revoke the editor role
 * as a site owner I need to 
   * [US-SO1] show my skills in front-end and back-end programming
   * [US-SO2] use PostgreSQL as a database
