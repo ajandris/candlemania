@@ -172,4 +172,14 @@ Testing revealed that comments block has many errors and had to be rewritten.
 | [US-SU3]      | revoke the editor role                  | Yes          | Use admin interface                                                       |                       |
 
 
+## As a site owner I need to
+| User story ID | User story                                                          | Test passed? | Comments                | Repeated test passed? |
+|---------------|---------------------------------------------------------------------|--------------|-------------------------|-----------------------|
+| [US-SO1]      | show my skills in front-end and back-end programming                | Yes          |                         |                       |
+| [US-SO2]      | use PostgreSQL as a database                                        | Yes          |                         |                       |
+| [US-SO3]      | use Django framework                                                | Yes          |                         |                       |
+| [US-SO4]      | the site's design, look and functionality follow industry standards | Yes          | Testing above proves it |                       |
+| [US-SO5]      | the site has 404 error page (page not found)                        | Yes          | Try non-existant page   |                       |
+
+
 [Back to README](README.md)
