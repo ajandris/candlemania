@@ -106,7 +106,7 @@ The structure plane is concerned with design elements on pages.
 **Wireframes** allow seeing what will be on pages. There is no detailed design or colours (in most cases); schematic elements only are placed on a page.
 
 For listings like list of blogs grid list with paginator is used as a reusable component like main contents in the following image.
-<img src="readme_assets/wireframes/frontpage_desktop_grid_with_item_images.png" style="width:75%; height:75%;" alt="Page with grid listing">
+<img src="readme_assets/wireframes/frontpage_desktop_grid_without_item_images.png" style="width:75%; height:75%;" alt="Page with grid listing">
 
 The home page contains the news: the newest blogs and the newest comments. It is possible to add new blocks by
 adding a new menu item.
