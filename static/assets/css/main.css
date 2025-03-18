@@ -258,6 +258,10 @@ footer {
     text-align: right;
 }
 
+#logo_link{
+    text-decoration: none;
+}
+
 /* -- desktop screen --*/
 
 /* -- Screen sizes are W3css responsiveness screen sizes --*/
@@ -275,13 +279,13 @@ footer {
         width: 85%;
     }
     #top_search_box_id{
-       height: 250px;
+       height: 50px;
     }
     #top_search_form_id input[type="text"]{
         width: 200px;
     }
     #top_search_form_id{
-        padding-top: 220px;
+        padding-top: 10px;
     }
 }
 
@@ -294,7 +298,7 @@ footer {
         width: 95%;
     }
     #top_search_box_id{
-       height: 30px;
+       height: 50px;
     }
     #top_search_form_id{
         padding-top: 0;
