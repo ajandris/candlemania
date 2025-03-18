@@ -103,13 +103,39 @@ At the end of development will be delivered:
 ## Structure plane
 The structure plane is concerned with design elements on pages.
 
-**Wireframes** allow seeing what will be on pages. There is no detailed design or colours (in most cases); #
-schematic elements only are placed on a page.
+**Wireframes** allow seeing what will be on pages. There is no detailed design or colours (in most cases); schematic elements only are placed on a page.
 
+For listings like list of blogs grid list with paginator is used as a reusable component like main contents in the following image.
+<img src="readme_assets/wireframes/frontpage_desktop_grid_with_item_images.png" style="width:75%; height:75%;" alt="Page with grid listing">
+
+The home page contains the news: the newest blogs and the newest comments. It is possible to add new blocks by
+adding a new menu item.
+
+**Desktop version**
+
+<img src="readme_assets/wireframes/front_page_desktop.png" style="width:75%; height:75%;" alt="Home page - desktop">
+
+**Mobile version**
+
+<img src="readme_assets/wireframes/front_page_mobile.png" style="width:75%; height:75%;" alt="Home page - mobile">
+
+**Contents structure**
+
+Page contents depend on its functionality. This document does not describe how exactly each page should look, but it 
+gives a structure with a bits that page can be combined with. For example, About page is static text only, and blog pages can 
+contain different set of buttons on the Command bar for different users. Information bar contains feedback from user actions.
+
+<img src="readme_assets/wireframes/contents_structure.png" style="width:75%; height:75%;" alt="Contents structure">
+
+Data entry form shows how each element in a form will look like.
+
+<img src="readme_assets/wireframes/data_entry_form.png" style="width:75%; height:75%;" alt="Contents structure">
 
 
 **Entity-Relationship Diagrams** (ERD) show relationship between [data] entities. 
 It is a starting point of a database design, and it affects site's navigation and design.
+
+
 
 
 ## Skeleton plane
