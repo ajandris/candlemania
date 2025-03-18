@@ -1,7 +1,7 @@
 Candle Mania
 =================
 
-Link to production site: 
+Link to production site: [CandleMania Project](https://candlemania.projects.andris.jancevskis.com/)
 
 # Introduction
 
@@ -9,11 +9,12 @@ The Candle Mania is a sample site for publishing blogs about candles.
 
 ## Users
 
-There are four categories of users: a visitor, a registered user, an admin and a superuser.
+There are four categories of users: a visitor, a registered user, an editor and a superuser.
 
-A **visitor** can browse products and view each product's details.
+A **visitor** can browse approved blogs and comments.
 
-A **registered user** can do everything a visitor can and add, edit, and delete its blogs. 
+A **registered user** can do everything a visitor can and add, edit, and delete its blogs 
+and approve and delete other user comments to its blog.
 
 An **editor** can accept blogs.
 
@@ -131,16 +132,27 @@ Data entry form shows how each element in a form will look like.
 
 <img src="readme_assets/wireframes/data_entry_form.png" style="width:75%; height:75%;" alt="Contents structure">
 
-
 **Entity-Relationship Diagrams** (ERD) show relationship between [data] entities. 
 It is a starting point of a database design, and it affects site's navigation and design.
 
+<img src="readme_assets/diagrams/er_diagram.png" style="width:75%; height:75%;" alt="Entity Relationship diagram">
 
-
+The resulting database structure is described in file [Structure](structure.md).
 
 ## Skeleton plane
+Skeleton Plane is concerned about the functionality of the site.
+
+
+
 
 ## Surface plane
+All pages are designed to adapt seamlessly to various screen sizes. Whether it's a desktop, tablet, or mobile screen, the user experience remains consistent and optimal.
+
+Due to the small project size, there is no design mock-up, and all elements will be built during development using the try-and-fix method.
+
+
+
+
 
 # Testing
 Software testing, a crucial step in software development, is the process of evaluating and verifying whether a software application meets its expected requirements and functions correctly, ensuring the end product is of high quality and meets user expectations.
@@ -299,7 +311,6 @@ account with a command '''python manage.py createsuperuser''' and enter all requ
 * press arrow pointing to the right.
 * Press Save
 ![User as an "Editor"](/readme_assets/deployment/make_user_editor.png)
-
 
 # References
 
