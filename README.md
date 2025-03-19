@@ -132,6 +132,9 @@ Data entry form shows how each element in a form will look like.
 
 <img src="readme_assets/wireframes/data_entry_form.png" style="width:75%; height:75%;" alt="Contents structure">
 
+## Skeleton plane
+Skeleton Plane is concerned about the functionality of the site including database structure.
+
 **Entity-Relationship Diagrams** (ERD) show relationship between [data] entities. 
 It is a starting point of a database design, and it affects site's navigation and design.
 
@@ -139,19 +142,69 @@ It is a starting point of a database design, and it affects site's navigation an
 
 The resulting database structure is described in file [Structure](structure.md).
 
-## Skeleton plane
-Skeleton Plane is concerned about the functionality of the site.
+**Navigation**
+The site has two menu's: The Main menu and a Command bar.
 
+The main menu is a bar of links which belongs to page's header. It is static and menu item is 
+greyed out when opened page is on the menu item's area.
 
+**Authorisation and authentication**
 
+The site uses allauth module for authorisation and authentication. On the top right corner are links for registration 
+and authorisation. Only user's self-registration and sign in and sight out functionality is supported.
+Registered user is promoted to an editor using admin interface and a created role Editor can be added to the 
+user's role list (currently no other roles are supported).
+
+**Search**
+
+Every page's header has an input field and a Search button to search blogs by title and content.
+The result is displayer in a grid list.
+
+**Command bar**
+
+Command bar in the blog area has different buttons depending on page and user access rights.
+* visitor: "Write a Blog", "My Blogs". When pressed system will ask to log in.
+* registered user: "Write a Blog", "My Blogs" in the lists; On his own blogs: "Edit", "Delete".
+* editor: "Write a Blog", "My Blogs", "Approve Blogs" in the lists; 
+in blog details: "Approve" if not approved, "Delete". "Edit" button if it is user's blog details.
+* superuser acts as a registered user on the site. 
+If superuser has an "Editor" role assigned, it acts as an editor.
+
+Blog comment may have "Approve" and/ or "Delete" buttons between author name and a comment.
+Comment can be added by any registered user. Registered user can delete its own comment.
+The blog author can approve and delete any comment left for that blog.
+
+**Paginator** appears when there is more than one page (8 items) in the list as a bar of numbers and arrows.
+Arrows are shows when there is at least one page to navigate to the arrow's direction (left or right).
 
 ## Surface plane
 All pages are designed to adapt seamlessly to various screen sizes. Whether it's a desktop, tablet, or mobile screen, the user experience remains consistent and optimal.
 
+**Menu** collapses on the mobile size.
+
 Due to the small project size, there is no design mock-up, and all elements will be built during development using the try-and-fix method.
 
+### Page Colours
+Page base colours are:
+* page background: #fafafa
+* header area above menu: #f3e0d1
+* Menu background: amber
+* Command bar buttons: #2dc26b
+* Footer background: #f3e0d1
+* Fonts: black
 
+### Behavioural colours
+Active menu item: bold, opacity 25%
+Delete button hover: red
+Other buttons hover: green
 
+### Information bar colours
+Information bar colours depends on what kind of information is to be shown:
+* debug: background #6c757d, font white,
+* info: background #17a2b8, font black,
+* success: background #28a745, font black,
+* warning: background #FFA500, font black,
+* debug: background #FF0000, font black.
 
 
 # Testing
