@@ -36,12 +36,12 @@
     </div>
     <div class="w3-container w3-row">
         <div class="w3-col l6 m12 s12">
-            <a href="{% url 'home' %}" id="logo_link"><img src="{% static 'assets/images/candlemania_logo.png' %}" alt="Candlemania Logo" id="header-logo">
+            <a href="{% url 'home' %}" id="logo-link"><img src="{% static 'assets/images/candlemania_logo.png' %}" alt="Candlemania Logo" id="header-logo">
                 <span id="header-site-title">CandleMania</span></a>
         </div>
         <div class="w3-col l6 m12 s12" id="top_search_column">
             <div id="top_search_box_id">
-                <form action="{% url 'search' %}" method="get" id="top_search_form_id">
+                <form action="{% url 'search' %}" method="get" id="top-search-form-id">
                         <input type="text" placeholder="Search ..." value="{{ prev_search_criteria }}" name="search_criteria"
                         minlength="3" required>
                         <button class="w3-round-xlarge w3-hover-green  ">Search</button>

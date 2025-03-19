@@ -246,19 +246,19 @@ footer {
     border-bottom: solid 1px grey;
 }
 
-#top_search_form_id{
+#top-search-form-id{
     padding-top: 130px;
 }
 
-#top_search_box_id{
+#top-search-box-id{
     height: 200px;
 }
 
-#top_search_column{
+#top-search-column{
     text-align: right;
 }
 
-#logo_link{
+#logo-link{
     text-decoration: none;
 }
 
@@ -303,7 +303,7 @@ footer {
     #top_search_form_id{
         padding-top: 0;
     }
-    #top_search_column{
+    #top-search-column{
         text-align: left;
     }
 
