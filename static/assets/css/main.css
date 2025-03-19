@@ -278,13 +278,13 @@ footer {
     .blog{
         width: 85%;
     }
-    #top_search_box_id{
+    #top-search-box-id{
        height: 50px;
     }
-    #top_search_form_id input[type="text"]{
+    #top-search-form-id input[type="text"]{
         width: 200px;
     }
-    #top_search_form_id{
+    #top-search-form-id{
         padding-top: 10px;
     }
 }
@@ -297,10 +297,10 @@ footer {
     .blog{
         width: 95%;
     }
-    #top_search_box_id{
+    #top-search-box-id{
        height: 50px;
     }
-    #top_search_form_id{
+    #top-search-form-id{
         padding-top: 0;
     }
     #top-search-column{
