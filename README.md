@@ -5,7 +5,31 @@ Link to production site: [CandleMania Project](https://candlemania.projects.andr
 
 # Introduction
 
-The Candle Mania is a sample site for publishing blogs about candles.
+Candle Mania is a blog website dedicated to candles, serving as a valuable resource for candle 
+enthusiasts. It provides information on candle-making techniques, various candle types, 
+and their applications. It explores topics such as scent selection, candle care, DIY tutorials, 
+and the impact of candles on ambience and well-being.
+
+This blog site may review popular candle brands, safety tips, and creative ways to incorporate candles into home decor or special occasions. 
+
+The overall purpose is to educate, inspire, and engage individuals who are passionate about candles.
+
+**The intended audience** for the site include:
+
+1. **Candle Enthusiasts** – People who love candles for their ambiance, scent, and decorative appeal.
+2. **DIY & Craft Lovers** – Those interested in making their own candles as a hobby or small business.
+3. **Home Decor Enthusiasts** – Individuals looking for creative ways to use candles in their living spaces.
+4. **Aromatherapy & Wellness Seekers** – People who use candles for relaxation, stress relief, and mood enhancement.
+5. **Gift Shoppers** – Those searching for unique and personalized candle gifts.
+6. **Eco-Conscious Consumers** – Individuals interested in sustainable, non-toxic, or handmade candles.
+7. **Small Business Owners** – Artisans or entrepreneurs in the candle-making industry looking for tips and trends.
+
+The blog would cater to anyone who appreciates the beauty, function, and sensory experience of candles!
+
+Anyone is welcome to browse blogs and read comments. Want to leave a comment or even write a blog yourself?
+Register and go ahead! To have an impact on site's content, became an editor often called a moderator.
+Get in touch by email: andris [at] jancevskis [dot] com
+
 
 ## Users
 
@@ -77,12 +101,7 @@ The Development of this site includes consequently following the stages describe
   * [US-SU1] list all registered users
   * [US-SU2] grant registered user an editor role
   * [US-SU3] revoke the editor role
-* as a site owner I need to 
-  * [US-SO1] show my skills in front-end and back-end programming
-  * [US-SO2] use PostgreSQL as a database
-  * [US-SO3] use Django framework
-  * [US-SO4] the site's design, look and functionality follow industry standards
-  * [US-SO5] the site has 404 error page (page not found)
+
 
 Site's development is performed using JetBrain's PyCharm IDE, Python version 3.12 and Django version 5.1.4.
 Site uses the database PostgreSQL v16 for storing data.
@@ -176,6 +195,14 @@ The blog author can approve and delete any comment left for that blog.
 
 **Paginator** appears when there is more than one page (8 items) in the list as a bar of numbers and arrows.
 Arrows are shows when there is at least one page to navigate to the arrow's direction (left or right).
+
+**Blog text**
+
+Users can write blogs and do some basic formatting like indentation or making text Italic or Bold.
+To achieve this django-tinymce package is used.
+
+Allowing html tags in the public domain may cause security issues. To address them a package bleach is used.
+It allows catching unwanted HTML tags and converts them to text for showing on web page.
 
 ## Surface plane
 All pages are designed to adapt seamlessly to various screen sizes. Whether it's a desktop, tablet, or mobile screen, the user experience remains consistent and optimal.
@@ -365,7 +392,17 @@ account with a command '''python manage.py createsuperuser''' and enter all requ
 * Press Save
 ![User as an "Editor"](/readme_assets/deployment/make_user_editor.png)
 
-# References
+# Acknowledgement
+I would like to extend my gratitude to my tutor Rachel Furlong and Code Institute.
 
 # Bibliography
+W3 Schools (https://www.w3schools.com/)
 
+# Next steps
+While this is a fictionary blog site, it can become a real.
+The possible next steps for site's idea to evolve and possibly "go live" could be:
+* add contact form,
+* allow using images in blogs,
+* add a candles shop,
+* change name to more unique,
+* explore Django CMS like "django CMS" or Wagtail.
