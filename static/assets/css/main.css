@@ -246,6 +246,14 @@ footer {
     border-bottom: solid 1px grey;
 }
 
+.grid-card a{
+    text-decoration: none;
+}
+
+.grid-card h1{
+    font-size: 1.6em;
+}
+
 #top-search-form-id{
     padding-top: 130px;
 }

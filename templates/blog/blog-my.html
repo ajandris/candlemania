@@ -16,7 +16,7 @@
     {% include 'snippets/messages.html' %}
 
     <!-- Data grid -->
-    <div class="w3-row">
+    <div class="w3-row grid-card">
         {% for blog in blogs %}
             <div class="w3-col m3 s12">
                     <div class="w3-card w3-border w3-margin">
@@ -33,7 +33,7 @@
             </div>
             {% if forloop.counter|divisibleby:4 != 0 %}
                 </div>
-                <div class="w3-row">
+                <div class="w3-row grid-card">
             {% endif %}
         {% endfor %}
     </div>
