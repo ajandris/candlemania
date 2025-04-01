@@ -44,17 +44,18 @@
     Last comments
 
     -->
-
-    <h1 class="center">Last comments</h1>
-        <div class="w3-row">
-        {% for comment in comments %}
-        <div class="w3-container index-comments">
-            <h4>Blog: <a href="{% url 'blog-post' comment.blog_post.slug %}">{{ comment.blog_post.title }}</a></h4>
-            <p><strong>Comment:</strong> {{ comment.content }}</p>
-            <p>Author: {{ comment.author }} @{{ comment.updated_at|date }} {{ comment.updated_at|time }}</p>
+    {% if comments.count > 0 %}
+        <h1 class="center">Last comments</h1>
+            <div class="w3-row">
+            {% for comment in comments %}
+            <div class="w3-container index-comments">
+                <h4>Blog: <a href="{% url 'blog-post' comment.blog_post.slug %}">{{ comment.blog_post.title }}</a></h4>
+                <p><strong>Comment:</strong> {{ comment.content }}</p>
+                <p>Author: {{ comment.author }} @{{ comment.updated_at|date }} {{ comment.updated_at|time }}</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    {% endif %}
 
 
 
