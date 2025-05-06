@@ -38,9 +38,13 @@ After testing
 
 **After fix**: no errors
 
+![HTML Home Page pass](readme_assets/pass/homepage_pass.png)
+
  **About page**
 
 No errors
+![HTML About Page pass](readme_assets/pass/about_pass.png)
+
 
 **Blogs home**
 
@@ -51,6 +55,7 @@ After testing
 The slash error is fixed with the base template fix.
 
 **After fix**: no errors
+![HTML Blogs home pass](readme_assets/pass/blogs_pass.png)
 
 **New Blog**
 
@@ -64,7 +69,13 @@ No errors.
 
 There are two stylesheet files created by the author, which are implemented in the files error.css and main.css.
 * error.css - no errors found
+
+![Errors CSS pass](readme_assets/pass/errors_css_pass.png)
+
 * main.css - no errors found
+
+![Main CSS pass](readme_assets/pass/main_css_pass.png)
+
 
 ## JavaScript
 **Formal syntax validation (**[**https://beautifytools.com/javascript-validator.php**](https://beautifytools.com/javascript-validator.php)**)**
@@ -82,6 +93,7 @@ The first check give three categories of errors:
 
     Solution: add semicolon
 
+![Main JS pass](readme_assets/pass/js_validator_pass.png)
 
 ## Performance
 **_Lighthouse (_**[**_https://web.dev/measure/_**](https://web.dev/measure/)**_)_**
