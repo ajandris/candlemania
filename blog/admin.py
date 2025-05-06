@@ -16,6 +16,7 @@ class BlogCommentAdmin(admin.ModelAdmin):
     """
     list_fields = [field.name for field in BlogComment._meta.get_fields()]
 
+
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
     """

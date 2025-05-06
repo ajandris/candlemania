@@ -12,6 +12,7 @@ from tinymce.models import HTMLField
 from candlemania import settings
 from main.utils import unique_slugify
 
+
 class BlogPost(models.Model):
     """
     Blog Post
@@ -22,10 +23,14 @@ class BlogPost(models.Model):
                              blank=False, null=False, db_comment="Blog title")
     content = HTMLField(blank=False, null=False, db_comment="Blog post")
     slug = models.SlugField(max_length=255, blank=False,
-                            null=False, unique=True, db_comment="Blog post slug")
-    approved = models.BooleanField(default=False, db_comment="Blog Approval status")
-    created_at = models.DateTimeField(auto_now_add=True, db_comment="Created at")
-    updated_at = models.DateTimeField(auto_now=True, db_comment="Updated at")
+                            null=False, unique=True,
+                            db_comment="Blog post slug")
+    approved = models.BooleanField(default=False,
+                                   db_comment="Blog Approval status")
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      db_comment="Created at")
+    updated_at = models.DateTimeField(auto_now=True,
+                                      db_comment="Updated at")
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -33,9 +38,11 @@ class BlogPost(models.Model):
 
         allowed_tags = settings.BLEACH_ALLOWED_TAGS
         allowed_attrs = settings.BLEACH_ALLOWED_ATTRIBUTES
-        sanitiser = CSSSanitizer(allowed_css_properties=settings.BLEACH_ALLOWED_STYLES)
+        sanitiser = CSSSanitizer(
+            allowed_css_properties=settings.BLEACH_ALLOWED_STYLES)
         self.content = bleach.clean(self.content, tags=allowed_tags,
-                                    attributes=allowed_attrs, css_sanitizer=sanitiser)
+                                    attributes=allowed_attrs,
+                                    css_sanitizer=sanitiser)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -54,12 +61,16 @@ class BlogComment(models.Model):
     Blog Post Comments
     """
     author = models.ForeignKey(User, on_delete=models.CASCADE,
-                               related_name='comment_author', db_comment="Comment author")
+                               related_name='comment_author',
+                               db_comment="Comment author")
     blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE,
-                                  related_name='blog_comments', db_comment="Blog Post")
+                                  related_name='blog_comments',
+                                  db_comment="Blog Post")
     content = models.TextField(blank=False, null=False, db_comment="Comment")
-    approved = models.BooleanField(default=False, db_comment="Comment Approval status")
-    created_at = models.DateTimeField(auto_now_add=True, db_comment="Created at")
+    approved = models.BooleanField(default=False,
+                                   db_comment="Comment Approval status")
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      db_comment="Created at")
     updated_at = models.DateTimeField(auto_now=True, db_comment="Updated at")
 
     def __str__(self):

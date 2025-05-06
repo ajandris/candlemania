@@ -5,7 +5,6 @@ Module description: This module defines data entry forms for BlogPost module
 
 """
 from django import forms
-
 from .models import BlogPost
 
 class BlogPostForm(forms.ModelForm):

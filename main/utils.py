@@ -5,6 +5,7 @@ Description: Utility functions
 
 from django.utils.crypto import get_random_string
 
+
 def unique_slugify(instance, slug):
     """
         Creates unique slugs

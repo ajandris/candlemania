@@ -16,11 +16,13 @@ from .models import BlogPost, BlogComment
 GRID_ITEMS_PER_PAGE = 8
 LIST_ITEMS_PER_PAGE = 10
 
+
 def blog_index(request):
     """
     Blog home page
     """
-    blogs = BlogPost.objects.all().filter(approved=True).order_by('-updated_at')
+    blogs = BlogPost.objects.all().filter(approved=True). \
+        order_by('-updated_at')
 
     paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
     page = request.GET.get('page')
@@ -28,7 +30,8 @@ def blog_index(request):
     try:
         pages = paginator.page(page)
     except PageNotAnInteger:
-        pages = paginator.page(1)  # If page is not an integer, deliver the first page.
+        # If page is not an integer, deliver the first page.
+        pages = paginator.page(1)
     except EmptyPage:
         # If page is out of range, deliver the last page of results.
         pages = paginator.page(paginator.num_pages)
@@ -39,6 +42,7 @@ def blog_index(request):
         "pages": pages
     }
     return render(request, 'blog/blog-home.html', context=context)
+
 
 @login_required
 def blog_new(request):
@@ -76,9 +80,10 @@ def blog_detail(request, slug):
     Blog detail page
     """
     blog = get_object_or_404(BlogPost, slug=slug)
-    comments = BlogComment.objects.filter(blog_post=blog).order_by('-created_at')
-    public_comments = BlogComment.objects.filter(blog_post=blog,
-                                                 approved=True).order_by('-created_at')
+    comments = BlogComment.objects.filter(blog_post=blog). \
+        order_by('-created_at')
+    public_comments = BlogComment.objects. \
+        filter(blog_post=blog, approved=True).order_by('-created_at')
     context = {
         "active_menu": "blog",
         "blog": blog,
@@ -87,17 +92,20 @@ def blog_detail(request, slug):
     }
     return render(request, 'blog/blog-detail.html', context=context)
 
+
 @login_required
 def blog_update(request):
     """
     Blog edit page
     """
     if request.method == 'POST':
-        action = request.POST.get('action') if request.POST.get('action') else ""
+        action = request.POST.get('action') \
+         if request.POST.get('action') else ""
         if action == 'to_update':
             # before update
             blog_to_update = get_object_or_404(BlogPost,
-                                               slug=request.POST['key'], author=request.user)
+                                               slug=request.POST['key'],
+                                               author=request.user)
             form = BlogPostForm(instance=blog_to_update, label_suffix="")
             context = {
                 "active_menu": "blog",
@@ -110,14 +118,16 @@ def blog_update(request):
             # Update data
             slug = request.POST['key'] if request.POST.get('key') else ""
             old_data = get_object_or_404(BlogPost, slug=slug)
-            form = BlogPostForm(request.POST, instance=old_data, label_suffix="")
+            form = BlogPostForm(request.POST, instance=old_data,
+                                label_suffix="")
             if form.is_valid():
                 blog_post = form.save(commit=False)
                 if form.cleaned_data['title'] != form.initial['title']:
                     blog_post.slug = None
                 blog_post.approved = False
                 blog_post.save()
-                messages.success(request, 'Your data has been saved successfully!')
+                messages.success(request,
+                                 'Your data has been saved successfully!')
                 return redirect('blog-my')
             messages.error(request, 'There was an error saving your data.')
             context = {
@@ -138,13 +148,15 @@ def blog_delete(request):
     """
     if request.method == "POST":
         action = request.POST.get("action")
-        blog_post = get_object_or_404(BlogPost, slug=request.POST.get("key"))
+        blog_post = get_object_or_404(BlogPost,
+                                      slug=request.POST.get("key"))
         if action == "to_delete":
             context = {
                 "active_menu": "blog",
                 "blog": blog_post
             }
-            return render(request, template_name='blog/blog-delete.html', context=context)
+            return render(request, template_name='blog/blog-delete.html',
+                          context=context)
         if action == "delete":
             blog_post.delete()
             messages.success(request, 'Data deleted successfully!')
@@ -153,6 +165,7 @@ def blog_delete(request):
         return redirect("blog-home")
 
     raise Http404("Wrong request method")
+
 
 @login_required
 def blog_approve(request):
@@ -167,7 +180,8 @@ def blog_approve(request):
                 "active_menu": "blog",
                 "blog": blog_post
             }
-            return render(request, template_name='blog/blog-approve.html', context=context)
+            return render(request, template_name='blog/blog-approve.html',
+                          context=context)
         if action == "approve":
             blog_post.approved = True
             blog_post.save()
@@ -178,19 +192,22 @@ def blog_approve(request):
 
     raise Http404("Wrong request method")
 
+
 @login_required
 def blog_my(request):
     """
     Current registered user's blogs
     """
-    blogs = BlogPost.objects.all().filter(author=request.user).order_by('-updated_at')
+    blogs = BlogPost.objects.all().filter(author=request.user). \
+        order_by('-updated_at')
     paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
     page = request.GET.get('page')
 
     try:
         pages = paginator.page(page)
     except PageNotAnInteger:
-        pages = paginator.page(1)  # If page is not an integer, deliver the first page.
+        # If page is not an integer, deliver the first page.
+        pages = paginator.page(1)
     except EmptyPage:
         # If page is out of range, deliver the last page of results.
         pages = paginator.page(paginator.num_pages)
@@ -202,19 +219,22 @@ def blog_my(request):
     }
     return render(request, 'blog/blog-my.html', context=context)
 
+
 @login_required
 def blog_approve_list(request):
     """
     Blog to approve list
     """
-    blogs = BlogPost.objects.all().filter(approved=False).order_by('-updated_at')
+    blogs = BlogPost.objects.all().filter(approved=False). \
+        order_by('-updated_at')
     paginator = Paginator(blogs, GRID_ITEMS_PER_PAGE)
     page = request.GET.get('page')
 
     try:
         pages = paginator.page(page)
     except PageNotAnInteger:
-        pages = paginator.page(1)  # If page is not an integer, deliver the first page.
+        # If page is not an integer, deliver the first page.
+        pages = paginator.page(1)
     except EmptyPage:
         # If page is out of range, deliver the last page of results.
         pages = paginator.page(paginator.num_pages)
@@ -225,6 +245,7 @@ def blog_approve_list(request):
         "pages": pages
     }
     return render(request, 'blog/blog-approve-list.html', context=context)
+
 
 @login_required
 def comment_add(request):
@@ -240,11 +261,13 @@ def comment_add(request):
         comment_object.approved = False
         comment_object.save()
 
-        messages.success(request, 'Comment added successfully. Wait for approval.')
+        messages.success(request,
+                         'Comment added successfully. Wait for approval.')
 
         return redirect('blog-post', slug=blog.slug)
 
     raise Http404("Wrong request method")
+
 
 @login_required
 def comment_delete(request):
@@ -252,12 +275,14 @@ def comment_delete(request):
     Delete comment page
     """
     if request.method == 'POST':
-        comment_object = get_object_or_404(BlogComment, pk=request.POST['comment_id'])
+        comment_object = get_object_or_404(BlogComment,
+                                           pk=request.POST['comment_id'])
         comment_object.delete()
         messages.success(request, 'Comment deleted successfully.')
         return redirect('blog-post', slug=comment_object.blog_post.slug)
 
     raise Http404("Wrong request method")
+
 
 @login_required
 def comment_approve(request):
@@ -265,7 +290,8 @@ def comment_approve(request):
     Approve comment page
     """
     if request.method == 'POST':
-        comment_object = get_object_or_404(BlogComment, pk=request.POST['comment_id'])
+        comment_object = get_object_or_404(BlogComment,
+                                           pk=request.POST['comment_id'])
         comment_object.approved = True
         comment_object.save()
         messages.success(request, 'Comment Approved.')

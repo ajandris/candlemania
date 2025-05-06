@@ -7,6 +7,7 @@ Module description: Provides functionality for blog field used with tinyMCE.
 
 from django.apps import AppConfig
 
+
 class BlogConfig(AppConfig):
     """
     Configuration for model's BlogPost field blog

@@ -131,6 +131,89 @@ This section provides list and the reasons why some errors are not fixed.
 
   Program does not need to change other inherited methods.
 
+### Checking each code for PEP8 compliance ###
+Each Python page is double-checked for pep8 compliance using https://pep8ci.herokuapp.com/.
+
+**File: blog/admin.py**
+
+_Result: pass_
+
+![blog/admin pep8 pass](readme_assets/pass/pep8/blog_admin.png)
+
+**File: blog/apps.py**
+
+_Result: pass_
+
+![blog/apps pep8 pass](readme_assets/pass/pep8/blog_apps.png)
+
+**File: blog/forms.py**
+
+_Result: pass_
+
+![blog/forms pep8 pass](readme_assets/pass/pep8/blog_forms.png)
+
+**File: blog/models.py**
+
+_Result: pass_
+
+![blog/models pep8 pass](readme_assets/pass/pep8/blog_models.png)
+
+**File: blog/urls.py**
+
+_Result: pass_
+
+![blog/urls pep8 pass](readme_assets/pass/pep8/blog_urls.png)
+
+**File: blog/views.py**
+
+_Result: pass_
+
+![blog/views pep8 pass](readme_assets/pass/pep8/blog_views.png)
+
+**File: candlemania/errors.py**
+
+_Result: pass_
+
+![candlemania/errors pep8 pass](readme_assets/pass/pep8/candlemania_errors.png)
+
+**File: candlemania/urls.py**
+
+_Result: pass_
+
+![candlemania/urls pep8 pass](readme_assets/pass/pep8/candlemania_urls.png)
+
+
+**File: main/templatetags/get_excerpt.py**
+
+_Result: pass_
+
+![main/templatetags/get_excerpt pep8 pass](readme_assets/pass/pep8/main_templatetags_get_excerpts.png)
+
+**File: main/templatetags/has_role.py**
+
+_Result: pass_
+
+![main/templatetags/has_role pep8 pass](readme_assets/pass/pep8/main_templatetags_has_role.png)
+
+**File: main/urls.py**
+
+_Result: pass_
+
+![main/urls pep8 pass](readme_assets/pass/pep8/main_urls.png)
+
+**File: main/utils.py**
+
+_Result: pass_
+
+![main/utils pep8 pass](readme_assets/pass/pep8/main_utils.png)
+
+
+**File: main/views.py**
+
+_Result: pass_
+
+![main/views pep8 pass](readme_assets/pass/pep8/main_views.png)
+
 
 # Acceptance testing
 Testing if software meets user stories (requirements).

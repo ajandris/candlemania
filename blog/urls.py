@@ -2,8 +2,8 @@
 URL Configuration for Blogs app
 """
 from django.urls import path
-
 from . import views
+
 
 urlpatterns = [
     path('', views.blog_index, name='blog-home'),
