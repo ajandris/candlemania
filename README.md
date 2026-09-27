@@ -1,7 +1,7 @@
 Candle Mania
 =================
 
-Link to production site: [CandleMania Project](https://candlemania.projects.andris.jancevskis.com/)
+Link to production site: [CandleMania Project](https://candlemania.p.jancevskis.com/)
 
 # Introduction
 
